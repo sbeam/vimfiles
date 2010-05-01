@@ -52,3 +52,6 @@
 [submodule "bundle/textile"]
 	path = bundle/textile
 	url = http://github.com/timcharper/textile.vim.git
+[submodule "bundle/ir_black"]
+	path = bundle/ir_black
+	url = git@github.com:underlog/ir_black.git
