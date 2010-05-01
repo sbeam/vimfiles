@@ -85,7 +85,7 @@ set statusline+=\ %P    "percent through file
 set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
-set guioptions-=T
+set guioptions=c
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
@@ -250,13 +250,14 @@ if has("gui_running")
         set term=gnome-256color
         colorscheme desert
     else
-        colorscheme railscasts
+        colorscheme ir_black
         set guitablabel=%M%t
         set lines=40
         set columns=115
     endif
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h14
+        set guifont=Monaco:h10
+        set columns=280
         " key binding for Command-T to behave properly
         " uncomment to replace the Mac Command-T key to Command-T plugin
         "macmenu &File.New\ Tab key=<nop>
