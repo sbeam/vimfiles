@@ -361,3 +361,12 @@ function! s:HighlightLongLines(width)
 endfunction
 
 set ignorecase
+
+set nobackup
+set dir=~/.vimbackup
+nnoremap <F2> :e ~/.vim/vimrc<cr>
+nnoremap <F3> :source ~/.vim/vimrc<cr>
+nnoremap <F5> :!ruby %<CR>
+nnoremap <F6> :Rake! <CR>
+nnoremap <F7> :nohlsearch <cr>
+nnoremap <F9> :bw <cr>
