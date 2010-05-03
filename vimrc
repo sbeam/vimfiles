@@ -370,3 +370,6 @@ nnoremap <F5> :!ruby %<CR>
 nnoremap <F6> :Rake! <CR>
 nnoremap <F7> :nohlsearch <cr>
 nnoremap <F9> :bw <cr>
+
+map <F12> \be
+imap <F12> <Esc>\be
