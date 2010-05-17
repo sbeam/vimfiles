@@ -373,3 +373,14 @@ nnoremap <F9> :bw <cr>
 
 map <F12> \be
 imap <F12> <Esc>\be
+
+autocmd User Rails silent! Rnavcommand spm spec/models -glob=**/* -suffix=_spec.rb -default=model()
+autocmd User Rails silent! Rnavcommand spc spec/controllers -glob=**/* -suffix=_controller_spec.rb -default=controller()
+autocmd User Rails silent! Rnavcommand sph spec/helpers -glob=**/* -suffix=_helper_spec.rb -default=controller()
+autocmd User Rails silent! Rnavcommand spv spec/views -glob=**/* -suffix=.html.erb_spec.rb -default=controller()
+autocmd User Rails silent! Rnavcommand config  config -glob=**/* -suffix= -default=environment.rb
+autocmd User Rails silent! Rnavcommand stepdef  features/step_definitions -suffix=_steps.rb
+autocmd User Rails silent! Rnavcommand feature features -suffix=.feature
+autocmd User Rails silent! Rnavcommand factory spec/factories -suffix=.rb
+autocmd User Rails silent! Rnavcommand mailer app/models -suffix=_mailer.rb
+autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=.rb
