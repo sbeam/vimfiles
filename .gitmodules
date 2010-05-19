@@ -1,6 +1,3 @@
-[submodule "snippets"]
-	path = snippets
-	url = git://github.com/akitaonrails/snipmate-snippets.git
 [submodule "bundle/rails"]
 	path = bundle/rails
 	url = git://github.com/tpope/vim-rails.git
@@ -64,3 +61,6 @@
 [submodule "bundle/gist-vim"]
 	path = bundle/gist-vim
 	url = git://github.com/mattn/gist-vim.git
+[submodule "bundle/autoclose"]
+	path = bundle/autoclose
+	url = http://github.com/Townk/vim-autoclose.git

@@ -384,3 +384,5 @@ autocmd User Rails silent! Rnavcommand feature features -suffix=.feature
 autocmd User Rails silent! Rnavcommand factory spec/factories -suffix=.rb
 autocmd User Rails silent! Rnavcommand mailer app/models -suffix=_mailer.rb
 autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=.rb
+
+autocmd FileType ruby let b:surround_108 = "#{\r}"
