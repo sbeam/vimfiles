@@ -33,6 +33,9 @@ nmap <D-4> g$
 nmap <D-6> g^
 nmap <D-0> g^
 
+"add some line space for easy reading
+set linespace=4
+
 "disable visual bell
 set visualbell t_vb=
 
@@ -251,7 +254,8 @@ if has("gui_running")
 
     if has("gui_gnome")
         set term=gnome-256color
-        colorscheme desert
+        colorscheme ir_dark
+        set guifont=Inconsolata\ Medium\ 12
     else
         colorscheme ir_black
         set guitablabel=%M%t
