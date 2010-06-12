@@ -195,8 +195,8 @@ function! s:Median(nums)
 endfunction
 
 "indent settings
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set autoindent
 
@@ -387,3 +387,4 @@ autocmd User Rails silent! Rnavcommand mailer app/models -suffix=_mailer.rb
 autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=.rb
 
 autocmd FileType ruby let b:surround_108 = "#{\r}"
+set transparency=5
