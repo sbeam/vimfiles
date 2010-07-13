@@ -254,14 +254,13 @@ if has("gui_running")
         colorscheme ir_dark
         set guifont=Inconsolata\ Medium\ 12
     else
-        colorscheme ir_black
+        colorscheme railscasts
         set guitablabel=%M%t
-        set lines=40
         set columns=115
     endif
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Monaco:h10
-        set columns=280
+        set guifont=DejaVu\ Sans\ Mono:h12
+        set columns=270
         " make Mac's Option key behave as the Meta key
         set invmmta
     endif
@@ -387,3 +386,7 @@ autocmd User Rails silent! Rnavcommand mailer app/models -suffix=_mailer.rb
 autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=.rb
 
 autocmd FileType ruby let b:surround_108 = "#{\r}"
+
+inoremap [ []<Left>
+inoremap { {}<Left>
+inoremap ( ()<Left>
