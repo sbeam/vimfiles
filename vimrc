@@ -271,6 +271,7 @@ if has("gui_running")
 else
     "dont load csapprox if there is no gui support - silences an annoying warning
     let g:CSApprox_loaded = 1
+    colorscheme ir_black
 endif
 
 nmap <silent> <Leader>p :NERDTreeToggle<CR>
