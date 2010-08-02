@@ -391,3 +391,6 @@ autocmd FileType ruby let b:surround_108 = "#{\r}"
 inoremap [ []<Left>
 inoremap { {}<Left>
 inoremap ( ()<Left>
+
+" surround.vim hack for terminals.
+imap ß <C-G>s
