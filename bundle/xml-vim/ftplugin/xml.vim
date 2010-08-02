@@ -214,7 +214,7 @@ fun! s:TagUnderCursor()
 			if getline('.')[col('.')] == '/'
 				let b:firstWasEndTag = 1
 				let b:gotoCloseTag = s:SavePos()
-			elseif getline('.')[col('.')] == '?' ||  getline('.')[col('.')] == '!'
+			elseif getline('.')[col('.')] == '?' ||  getline('.')[col('.')] == '!' ||  getline('.')[col('.')] == '%' 
 				"we don't deal with processing instructions or dtd
 				"related definitions
 				retu l:haveTag
