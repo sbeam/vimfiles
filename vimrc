@@ -194,6 +194,12 @@ function! s:Median(nums)
     endif
 endfunction
 
+function! GoToWip()
+  :LAck -a wip features/
+endfunction
+
+command! Wip call GoToWip()
+
 "indent settings
 set shiftwidth=2
 set softtabstop=2
@@ -251,6 +257,7 @@ if has("gui_running")
 
     if has("gui_gnome")
         set term=gnome-256color
+        set t_Co=256
         colorscheme ir_dark
         set guifont=Inconsolata\ Medium\ 12
     else
@@ -270,8 +277,8 @@ if has("gui_running")
     endif
 else
     "dont load csapprox if there is no gui support - silences an annoying warning
-    let g:CSApprox_loaded = 1
-    colorscheme ir_black
+    set t_Co=256
+    colorscheme ir_dark
 endif
 
 nmap <silent> <Leader>p :NERDTreeToggle<CR>
@@ -349,7 +356,7 @@ function! SetCursorPosition()
     end
 endfunction
 
-"define :HighlightLongLines command to highlight the offending parts of
+"define :HighlightLongLines command to highlight the off#nding parts of
 "lines that are longer than the specified length (defaulting to 80)
 command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
 function! s:HighlightLongLines(width)
@@ -376,21 +383,27 @@ map <F12> \be
 imap <F12> <Esc>\be
 
 autocmd User Rails silent! Rnavcommand spm spec/models -glob=**/* -suffix=_spec.rb -default=model()
+autocmd User Rails silent! Rnavcommand spi spec/integration -glob=**/* -suffix=_spec.rb -default=model()
 autocmd User Rails silent! Rnavcommand spc spec/controllers -glob=**/* -suffix=_controller_spec.rb -default=controller()
 autocmd User Rails silent! Rnavcommand sph spec/helpers -glob=**/* -suffix=_helper_spec.rb -default=controller()
 autocmd User Rails silent! Rnavcommand spv spec/views -glob=**/* -suffix=.html.erb_spec.rb -default=controller()
-autocmd User Rails silent! Rnavcommand config  config -glob=**/* -suffix= -default=environment.rb
 autocmd User Rails silent! Rnavcommand stepdef  features/step_definitions -suffix=_steps.rb
 autocmd User Rails silent! Rnavcommand feature features -suffix=.feature
 autocmd User Rails silent! Rnavcommand factory spec/factories -suffix=.rb
 autocmd User Rails silent! Rnavcommand mailer app/models -suffix=_mailer.rb
-autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=.rb
+autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=_presenter.rb
+autocmd User Rails silent! Rnavcommand uploader app/uploaders -suffix=_uploader.rb
+autocmd User Rails silent! Rnavcommand site config/site -suffix=.yml
+autocmd User Rails silent! Rnavcommand sass app/stylesheets -suffix=.scss
 
-autocmd FileType ruby let b:surround_108 = "#{\r}"
-
-inoremap [ []<Left>
-inoremap { {}<Left>
-inoremap ( ()<Left>
+autocmd FileType ruby inoremap <C-S-l> #{}<Left>
 
 " surround.vim hack for terminals.
 imap ß <C-G>s
+
+" pick last command
+cmap <C-n> <Up>
+
+nmap ,rv :Rview 
+nmap ,rm :Rmodel 
+nmap ,rc :Rcontroller 
