@@ -61,9 +61,6 @@
 [submodule "bundle/gist-vim"]
 	path = bundle/gist-vim
 	url = git://github.com/mattn/gist-vim.git
-[submodule "snippets"]
-	path = snippets
-	url = http://github.com/scrooloose/snipmate-snippets.git
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = http://github.com/pangloss/vim-javascript.git
