@@ -251,20 +251,25 @@ set hidden
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
+
 if has("gui_running")
     "tell the term has 256 colors
     set t_Co=256
+
+    if has("gui_gtk")
+        set t_Co=256
+        colorscheme railscasts
+        set guifont=DejaVu\ Sans\ Mono\ 8
+        set columns=200
+    endif
 
     if has("gui_gnome")
         set term=gnome-256color
         set t_Co=256
         colorscheme ir_dark
-        set guifont=Inconsolata\ Medium\ 12
-    else
-        colorscheme railscasts
-        set guitablabel=%M%t
-        set columns=115
+        set guifont=DejaVu\ Sans\ Mono\ 12
     endif
+
     if has("gui_mac") || has("gui_macvim")
         set guifont=DejaVu\ Sans\ Mono:h12
         set columns=270
@@ -278,7 +283,7 @@ if has("gui_running")
 else
     "dont load csapprox if there is no gui support - silences an annoying warning
     set t_Co=256
-    colorscheme ir_dark
+    colorscheme railscasts
 endif
 
 nmap <silent> <Leader>p :NERDTreeToggle<CR>
@@ -390,7 +395,7 @@ autocmd User Rails silent! Rnavcommand spv spec/views -glob=**/* -suffix=.html.e
 autocmd User Rails silent! Rnavcommand stepdef  features/step_definitions -suffix=_steps.rb
 autocmd User Rails silent! Rnavcommand feature features -suffix=.feature
 autocmd User Rails silent! Rnavcommand factory spec/factories -suffix=.rb
-autocmd User Rails silent! Rnavcommand mailer app/models -suffix=_mailer.rb
+autocmd User Rails silent! Rnavcommand mailer app/mailers -suffix=_mailer.rb
 autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=_presenter.rb
 autocmd User Rails silent! Rnavcommand uploader app/uploaders -suffix=_uploader.rb
 autocmd User Rails silent! Rnavcommand site config/site -suffix=.yml
@@ -407,3 +412,7 @@ cmap <C-n> <Up>
 nmap ,rv :Rview 
 nmap ,rm :Rmodel 
 nmap ,rc :Rcontroller 
+
+nmap <Space> :
+imap <C-Space> <C-o>:
+
