@@ -416,3 +416,4 @@ nmap ,rc :Rcontroller
 nmap <Space> :
 imap <C-Space> <C-o>:
 
+nmap ,rh :Rhelper
