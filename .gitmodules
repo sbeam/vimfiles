@@ -51,7 +51,7 @@
 	url = http://github.com/timcharper/textile.vim.git
 [submodule "bundle/ir_black"]
 	path = bundle/ir_black
-	url = git@github.com:underlog/ir_black.git
+	url = https://github.com/underlog/ir_black.git
 [submodule "bundle/vim-ruby"]
 	path = bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
@@ -72,4 +72,4 @@
 	url = git://git.wincent.com/command-t.git
 [submodule "snippets"]
 	path = snippets
-	url = https://underlog@github.com/underlog/snipmate-snippets.git
+	url = https://github.com/underlog/snipmate-snippets.git
