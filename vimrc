@@ -10,31 +10,15 @@ set backspace=indent,eol,start
 "store lots of :cmdline history
 set history=1000
 
-set showcmd     "show incomplete cmds down the bottom
+" set showcmd     "show incomplete cmds down the bottom
 set showmode    "show current mode down the bottom
 
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
 
-set number      "add line numbers
-set showbreak=...
+" set number      "add line numbers
+set showbreak=>>>>
 set wrap linebreak nolist
-
-"mapping for command key to map navigation thru display lines instead
-"of just numbered lines
-vmap <D-j> gj
-vmap <D-k> gk
-vmap <D-4> g$
-vmap <D-6> g^
-vmap <D-0> g^
-nmap <D-j> gj
-nmap <D-k> gk
-nmap <D-4> g$
-nmap <D-6> g^
-nmap <D-0> g^
-
-"disable visual bell
-set visualbell t_vb=
 
 "try to make possible to navigate within lines of wrapped lines
 nmap <Down> gj
@@ -49,43 +33,8 @@ set statusline+=%#warningmsg#
 set statusline+=%{&ff!='unix'?'['.&ff.']':''}
 set statusline+=%*
 
-"display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
-
-set statusline+=%h      "help file flag
-set statusline+=%y      "filetype
-set statusline+=%r      "read only flag
-set statusline+=%m      "modified flag
-
-"display a warning if &et is wrong, or we have mixed-indenting
-set statusline+=%#error#
-set statusline+=%{StatuslineTabWarning()}
-set statusline+=%*
-
-set statusline+=%{StatuslineTrailingSpaceWarning()}
-
-set statusline+=%{StatuslineLongLineWarning()}
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-"display a warning if &paste is set
-set statusline+=%#error#
-set statusline+=%{&paste?'[paste]':''}
-set statusline+=%*
-
-set statusline+=%=      "left/right separator
-set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set laststatus=2
-
 "turn off needless toolbar on gvim/mvim
-set guioptions=c
+" set guioptions=c
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
@@ -251,41 +200,6 @@ set hidden
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-
-if has("gui_running")
-    "tell the term has 256 colors
-    set t_Co=256
-
-    if has("gui_gtk")
-        set t_Co=256
-        colorscheme railscasts
-        set guifont=DejaVu\ Sans\ Mono\ 8
-        set columns=200
-    endif
-
-    if has("gui_gnome")
-        set term=gnome-256color
-        set t_Co=256
-        colorscheme ir_dark
-        set guifont=DejaVu\ Sans\ Mono\ 12
-    endif
-
-    if has("gui_mac") || has("gui_macvim")
-        set guifont=DejaVu\ Sans\ Mono:h12
-        set columns=270
-        " make Mac's Option key behave as the Meta key
-        set invmmta
-    endif
-    if has("gui_win32") || has("gui_win32s")
-        set guifont=Consolas:h12
-        set enc=utf-8
-    endif
-else
-    "dont load csapprox if there is no gui support - silences an annoying warning
-    set t_Co=256
-    colorscheme railscasts
-endif
-
 nmap <silent> <Leader>p :NERDTreeToggle<CR>
 
 "make <c-l> clear the highlight as well as redraw
@@ -299,7 +213,7 @@ nnoremap <leader>b :BufExplorer<cr>
 nnoremap <leader>t :CommandT<CR>
 
 "map Q to something useful
-noremap Q gq
+" noremap Q gq
 
 "make Y consistent with C and D
 nnoremap Y y$
@@ -374,6 +288,7 @@ function! s:HighlightLongLines(width)
 endfunction
 
 set ignorecase
+set smartcase
 
 set nobackup
 set dir=~/.vimbackup
@@ -407,13 +322,13 @@ autocmd FileType ruby inoremap <C-S-l> #{}<Left>
 imap ß <C-G>s
 
 " pick last command
-cmap <C-n> <Up>
+"cmap <C-n> <Up>
 
 nmap ,rv :Rview 
 nmap ,rm :Rmodel 
 nmap ,rc :Rcontroller 
 
-nmap <Space> :
-imap <C-Space> <C-o>:
+" nmap <Space> :
+" imap <C-Space> <C-o>:
 
 nmap ,rh :Rhelper
