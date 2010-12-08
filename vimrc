@@ -24,7 +24,10 @@ set nowrap linebreak nolist
 " set fo=l
 
 "statusline setup
-set statusline=%f       "tail of the filename
+set statusline=%f\        "tail of the filename
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%h      "help file flag
 set statusline+=%=      "left/right separator
 
 "display a warning if fileformat isnt unix
@@ -36,17 +39,16 @@ set statusline+=%#warningmsg#
 set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
 set statusline+=%*
 
-set statusline+=%h      "help file flag
-set statusline+=%y      "filetype
-set statusline+=%r      "read only flag
-set statusline+=%m      "modified flag
+
+set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+set statusline+=%y\       "filetype
 
 "display a warning if &et is wrong, or we have mixed-indenting
-set statusline+=%#error#
+set statusline+=%#warningmsg#
 set statusline+=%{StatuslineTabWarning()}
 set statusline+=%*
 
-set statusline+=%{StatuslineTrailingSpaceWarning()}
+" set statusline+=%{StatuslineTrailingSpaceWarning()}
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -57,9 +59,8 @@ set statusline+=%#error#
 set statusline+=%{&paste?'[paste]':''}
 set statusline+=%*
 
-set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
 set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
+set statusline+=%l   "cursor line/total lines
 set statusline+=\ %P    "percent through file
 set laststatus=2
 
