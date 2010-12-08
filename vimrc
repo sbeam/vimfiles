@@ -1,7 +1,4 @@
-"Fabio Kung <fabio.kung@gmail.com>
-"
-"Use Vim settings, rather then Vi settings (much better!).
-"This must be first, because it changes other options as a side effect.
+" we use a vim
 set nocompatible
 
 "allow backspacing over everything in insert mode
@@ -21,17 +18,49 @@ set showbreak=>>>>
 set wrap linebreak nolist
 
 "try to make possible to navigate within lines of wrapped lines
-nmap <Down> gj
-nmap <Up> gk
-set fo=l
+" nmap <Down> gj
+" nmap <Up> gk
+" set fo=l
 
 "statusline setup
 set statusline=%f       "tail of the filename
+set statusline+=%=      "left/right separator
 
 "display a warning if fileformat isnt unix
 set statusline+=%#warningmsg#
 set statusline+=%{&ff!='unix'?'['.&ff.']':''}
 set statusline+=%*
+"display a warning if file encoding isnt utf-8
+set statusline+=%#warningmsg#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
+
+set statusline+=%h      "help file flag
+set statusline+=%y      "filetype
+set statusline+=%r      "read only flag
+set statusline+=%m      "modified flag
+
+"display a warning if &et is wrong, or we have mixed-indenting
+set statusline+=%#error#
+set statusline+=%{StatuslineTabWarning()}
+set statusline+=%*
+
+set statusline+=%{StatuslineTrailingSpaceWarning()}
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"display a warning if &paste is set
+set statusline+=%#error#
+set statusline+=%{&paste?'[paste]':''}
+set statusline+=%*
+
+set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
 " set guioptions=c
@@ -88,66 +117,7 @@ endfunction
 "recalculate the long line warning when idle and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
 
-"return a warning for "long lines" where "long" is either &textwidth or 80 (if
-"no &textwidth is set)
-"
-"return '' if no long lines
-"return '[#x,my,$z] if long lines are found, were x is the number of long
-"lines, y is the median length of the long lines and z is the length of the
-"longest line
-function! StatuslineLongLineWarning()
-    if !exists("b:statusline_long_line_warning")
-        let long_line_lens = s:LongLines()
 
-        if len(long_line_lens) > 0
-            let b:statusline_long_line_warning = "[" .
-                        \ '#' . len(long_line_lens) . "," .
-                        \ 'm' . s:Median(long_line_lens) . "," .
-                        \ '$' . max(long_line_lens) . "]"
-        else
-            let b:statusline_long_line_warning = ""
-        endif
-    endif
-    return b:statusline_long_line_warning
-endfunction
-
-"return a list containing the lengths of the long lines in this buffer
-function! s:LongLines()
-    let threshold = (&tw ? &tw : 80)
-    let spaces = repeat(" ", &ts)
-
-    let long_line_lens = []
-
-    let i = 1
-    while i <= line("$")
-        let len = strlen(substitute(getline(i), '\t', spaces, 'g'))
-        if len > threshold
-            call add(long_line_lens, len)
-        endif
-        let i += 1
-    endwhile
-
-    return long_line_lens
-endfunction
-
-"find the median of the given array of numbers
-function! s:Median(nums)
-    let nums = sort(a:nums)
-    let l = len(nums)
-
-    if l % 2 == 1
-        let i = (l-1) / 2
-        return nums[i]
-    else
-        return (nums[l/2] + nums[(l/2)-1]) / 2
-    endif
-endfunction
-
-function! GoToWip()
-  :LAck -a wip features/
-endfunction
-
-command! Wip call GoToWip()
 
 "indent settings
 set shiftwidth=4
@@ -464,127 +434,6 @@ function! PHPmapper()
     map <M-p> :sil! !/usr/bin/firefox -remote "openURL(http://www.php.net/<cword>, new-tab)"<CR>;;
 endfunction 
 
-" http://www.stripey.com/vim/html.html
-function! InsertCloseTag()
-" inserts the appropriate closing HTML tag; used for the \hc operation defined
-" above;
-" requires ignorecase to be set, or to type HTML tags in exactly the same case
-" that I do;
-" doesn't treat <P> as something that needs closing;
-" clobbers register z and mark z
-" 
-" by Smylers  http://www.stripey.com/vim/
-" 2000 May 3
-
-  if &filetype == 'html'
-  
-    " list of tags which shouldn't be closed:
-    let UnaryTags = ' Area Base Br DD DT HR Img Input LI Link Meta P Param '
-
-    " remember current position:
-    normal mz
-
-    " loop backwards looking for tags:
-    let Found = 0
-    while Found == 0
-      " find the previous <, then go forwards one character and grab the first
-      " character plus the entire word:
-      execute "normal ?\<LT>\<CR>l"
-      normal "zyl
-      let Tag = expand('<cword>')
-
-      " if this is a closing tag, skip back to its matching opening tag:
-      if @z == '/'
-        execute "normal ?\<LT>" . Tag . "\<CR>"
-
-      " if this is a unary tag, then position the cursor for the next
-      " iteration:
-      elseif match(UnaryTags, ' ' . Tag . ' ') > 0
-        normal h
-
-      " otherwise this is the tag that needs closing:
-      else
-        let Found = 1
-
-      endif
-    endwhile " not yet found match
-
-    " create the closing tag and insert it:
-    let @z = '</' . Tag . '>'
-    normal `z"zp
-
-  else " filetype is not HTML
-    echohl ErrorMsg
-    echo 'The InsertCloseTag() function is only intended to be used in HTML ' .
-      \ 'files.'
-    sleep
-    echohl None
-  
-  endif " check on filetype
-
-endfunction " InsertCloseTag()
-
-
-
-
-function! RepeatTag(Forward)
-" repeats a (non-closing) HTML tag from elsewhere in the document; call
-" repeatedly until the correct tag is inserted (like with insert mode <Ctrl>+P
-" and <Ctrl>+N completion), with Forward determining whether to copy forwards
-" or backwards through the file; used for the \hp and \hn operations defined
-" above;
-" requires preservation of marks i and j;
-" clobbers register z
-" 
-" by Smylers  http://www.stripey.com/vim/
-" 2000 Apr 30
-
-  if &filetype == 'html'
-
-    " if the cursor is where this function left it, then continue from there:
-    if line('.') == line("'i") && col('.') == col("'i")
-      " delete the tag inserted last time:
-      if col('.') == strlen(getline('.'))
-        normal dF<x
-      else
-        normal dF<x
-        if col('.') != 1
-          normal h
-        endif
-      endif
-      " note the cursor position, then jump to where the deleted tag was found:
-      normal mi`j
-
-    " otherwise, just store the cursor position (in mark i):
-    else
-      normal mi
-    endif
-
-    if a:Forward
-      let SearchCmd = '/'
-    else
-      let SearchCmd = '?'
-    endif
-      
-    " find the next non-closing tag (in the appropriate direction), note where
-    " it is (in mark j) in case this function gets called again, then yank it
-    " and paste a copy at the original cursor position, and store the final
-    " cursor position (in mark i) for use next time round:
-    execute "normal " . SearchCmd . "<[^/>].\\{-}>\<CR>mj\"zyf>`i\"zpmi"
-
-  else " filetype is not HTML
-    echohl ErrorMsg
-    echo 'The RepeatTag() function is only intended to be used in HTML files.'
-    sleep
-    echohl None
-  
-  endif
-
-endfunction " RepeatTag()
-
-
-
-
 
 
 
@@ -612,72 +461,5 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 
-autocmd BufEnter * if &filetype == "html" | call MapHTMLKeys() | endif
-function! MapHTMLKeys(...)
-" sets up various insert mode key mappings suitable for typing HTML, and
-" automatically removes them when switching to a non-HTML buffer
-
-  " if no parameter, or a non-zero parameter, set up the mappings:
-  if a:0 == 0 || a:1 != 0
-
-    " require two backslashes to get one:
-    inoremap \\ \
-
-    " then use backslash followed by various symbols insert HTML characters:
-    inoremap \& &amp;
-    inoremap \< &lt;
-    inoremap \> &gt;
-    "inoremap \. &middot;
-    inoremap \" &quot;
-
-    "inoremap \} &raquo;
-    "inoremap \{ &laquo;
-
-    " em dash -- have \- always insert an em dash, and also have _ do it if
-    " ever typed as a word on its own, but not in the middle of other words:
-    " inoremap \- &#8212;
-    " iabbrev _ &#8212;
-
-    " hard space with <Ctrl>+Space, and \<Space> for when that doesn't work:
-    inoremap \<Space> &nbsp;
-    imap <C-Space> \<Space>
-
-    " have the normal open and close single quote keys producing the character
-    " codes that will produce nice curved quotes (and apostophes) on both Unix
-    " and Windows:
-    "inoremap ` &#8216;
-    
-    "inoremap ' &#8217;
-    " then provide the original functionality with preceding backslashes:
-    "inoremap \` `
-    "inoremap \' '
-
-
-    
-    " when switching to a non-HTML buffer, automatically undo these mappings:
-    autocmd! BufLeave * call MapHTMLKeys(0)
-
-  " parameter of zero, so want to unmap everything:
-  else
-    iunmap \\
-    iunmap \&
-    iunmap \<
-    iunmap \>
-    "iunmap \-
-    "iunabbrev _
-    iunmap \<Space>
-    iunmap <C-Space>
-    "iunmap `
-    "iunmap '
-    "iunmap \`
-    "iunmap \'
-    "iunmap \"
-
-    " once done, get rid of the autocmd that called this:
-    autocmd! BufLeave *
-
-  endif " test for mapping/unmapping
-
-endfunction " MapHTMLKeys()
 
 
