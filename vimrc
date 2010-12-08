@@ -150,8 +150,8 @@ endfunction
 command! Wip call GoToWip()
 
 "indent settings
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set autoindent
 
@@ -332,3 +332,352 @@ nmap ,rc :Rcontroller
 " imap <C-Space> <C-o>:
 
 nmap ,rh :Rhelper
+
+
+"
+" Colo(u)red or not colo(u)red
+" If you want color you should set this to true
+"
+let color = "true"
+"
+if has("syntax")
+    if color == "true"
+        " This will switch colors ON
+        so ${VIMRUNTIME}/syntax/syntax.vim
+    else
+        " this switches colors OFF
+        syntax off
+        set t_Co=0
+    endif
+endif
+
+
+set sw=4
+set ts=4
+set expandtab
+
+" set guifont=Andale\ Mono\ 9
+set guifont=MiscFixed\ Semi-Condensed\ 9
+
+set formatoptions=tcql
+set ruler
+set smartindent
+set wmh=0
+set foldcolumn=1
+
+colorscheme sam
+hi Cursor gui=reverse guifg=NONE guibg=NONE
+hi phpSwitch guifg=#cc3333
+
+:map ,m :w<CR>
+:map ,j :wa<CR>
+:map ,l <C-w>n :e .<CR>
+:map ,d :r! date<CR>
+
+if version >= 600
+     filetype plugin indent on
+endif 
+runtime macros/matchit.vim
+
+
+" show taglist window with ctags for the file.
+map ,t :TlistToggle<CR>   
+"let Tlist_Auto_Open  = 1
+let Tlist_Use_Right_Window = 1
+"set Tlist_Show_Menu 1
+let Tlist_File_Fold_Auto_Close = 1
+" let Tlist_Close_On_Select = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+
+
+
+" ~/.vimrc ends here
+
+" Toggle fold state between closed and opened.
+"
+" If there is no fold at current line, just moves forward.
+" If it is present, reverse it's state.
+fun! ToggleFold()
+if foldlevel('.') == 0
+normal! l
+else
+if foldclosed('.') < 0
+. foldclose
+else
+. foldopen
+endif
+endif
+" Clear status line
+echo
+endfun
+
+" Map this function to Space key.
+noremap <space> :call ToggleFold()<CR>
+nmap zz V%zf
+set foldmethod=marker
+
+
+
+" Google search
+map <M-g> :sil! !/usr/bin/firefox -remote "openURL(http://www.google.com/search?q=<cword>, new-tab)"<CR>;;
+vmap <M-g> y:let @g = URLencodeReg()<CR>:sil! !/usr/bin/firefox -remote "openURL(http://www.google.com/search?q=<C-R>g, new-tab)"<CR>
+
+" tab control
+nmap <C-Insert> :tabnew<CR>
+nmap <C-Delete> :tabclose<CR>
+
+" alt-n fixes newlines from Mac users
+map <M-n> :%s/\r/\r/g<CR>
+
+" mainly done to avoid Ex mode annoyance when fat fingering Q
+nmap Q :reg<CR>
+
+
+function! InsertTabWrapper(direction)
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    elseif "backward" == a:direction
+        return "\<c-p>"
+    else
+        return "\<c-n>"
+    endif
+endfunction
+
+inoremap <TAB> <C-R>=InsertTabWrapper ("forward")<CR>
+inoremap <S-TAB> <C-R>=InsertTabWrapper ("backward")<CR>
+
+
+if has("autocmd")
+    autocmd FileType php     call PHPmapper()
+endif
+
+function! PHPmapper()
+    " PHP debug dump selected thing to stdout, with print_r
+    vmap ,p yoprint '<pre>DEBUG at line '.__LINE__.' of ' . __FILE__ . "\n";<CR>print_r(<ESC>pA);<CR>print '</pre>';<ESC> 
+    " PHP debug dump to error_log
+    vmap ,e yo/* DEBUG */ ob_start(); print "=======\nDEBUG ".date('r')."\nline ".__LINE__." of ".__FILE__."\n";<CR>print_r(<ESC>pA);<CR>print "\n\n"; error_log(ob_get_clean(),3,'/tmp/phpdebug.log');<ESC>
+    
+    map <F9> :w<CR>:!/usr/bin/php -l %<CR>
+   
+    " load PHP on Alt-P
+    map <M-p> :sil! !/usr/bin/firefox -remote "openURL(http://www.php.net/<cword>, new-tab)"<CR>;;
+endfunction 
+
+" http://www.stripey.com/vim/html.html
+function! InsertCloseTag()
+" inserts the appropriate closing HTML tag; used for the \hc operation defined
+" above;
+" requires ignorecase to be set, or to type HTML tags in exactly the same case
+" that I do;
+" doesn't treat <P> as something that needs closing;
+" clobbers register z and mark z
+" 
+" by Smylers  http://www.stripey.com/vim/
+" 2000 May 3
+
+  if &filetype == 'html'
+  
+    " list of tags which shouldn't be closed:
+    let UnaryTags = ' Area Base Br DD DT HR Img Input LI Link Meta P Param '
+
+    " remember current position:
+    normal mz
+
+    " loop backwards looking for tags:
+    let Found = 0
+    while Found == 0
+      " find the previous <, then go forwards one character and grab the first
+      " character plus the entire word:
+      execute "normal ?\<LT>\<CR>l"
+      normal "zyl
+      let Tag = expand('<cword>')
+
+      " if this is a closing tag, skip back to its matching opening tag:
+      if @z == '/'
+        execute "normal ?\<LT>" . Tag . "\<CR>"
+
+      " if this is a unary tag, then position the cursor for the next
+      " iteration:
+      elseif match(UnaryTags, ' ' . Tag . ' ') > 0
+        normal h
+
+      " otherwise this is the tag that needs closing:
+      else
+        let Found = 1
+
+      endif
+    endwhile " not yet found match
+
+    " create the closing tag and insert it:
+    let @z = '</' . Tag . '>'
+    normal `z"zp
+
+  else " filetype is not HTML
+    echohl ErrorMsg
+    echo 'The InsertCloseTag() function is only intended to be used in HTML ' .
+      \ 'files.'
+    sleep
+    echohl None
+  
+  endif " check on filetype
+
+endfunction " InsertCloseTag()
+
+
+
+
+function! RepeatTag(Forward)
+" repeats a (non-closing) HTML tag from elsewhere in the document; call
+" repeatedly until the correct tag is inserted (like with insert mode <Ctrl>+P
+" and <Ctrl>+N completion), with Forward determining whether to copy forwards
+" or backwards through the file; used for the \hp and \hn operations defined
+" above;
+" requires preservation of marks i and j;
+" clobbers register z
+" 
+" by Smylers  http://www.stripey.com/vim/
+" 2000 Apr 30
+
+  if &filetype == 'html'
+
+    " if the cursor is where this function left it, then continue from there:
+    if line('.') == line("'i") && col('.') == col("'i")
+      " delete the tag inserted last time:
+      if col('.') == strlen(getline('.'))
+        normal dF<x
+      else
+        normal dF<x
+        if col('.') != 1
+          normal h
+        endif
+      endif
+      " note the cursor position, then jump to where the deleted tag was found:
+      normal mi`j
+
+    " otherwise, just store the cursor position (in mark i):
+    else
+      normal mi
+    endif
+
+    if a:Forward
+      let SearchCmd = '/'
+    else
+      let SearchCmd = '?'
+    endif
+      
+    " find the next non-closing tag (in the appropriate direction), note where
+    " it is (in mark j) in case this function gets called again, then yank it
+    " and paste a copy at the original cursor position, and store the final
+    " cursor position (in mark i) for use next time round:
+    execute "normal " . SearchCmd . "<[^/>].\\{-}>\<CR>mj\"zyf>`i\"zpmi"
+
+  else " filetype is not HTML
+    echohl ErrorMsg
+    echo 'The RepeatTag() function is only intended to be used in HTML files.'
+    sleep
+    echohl None
+  
+  endif
+
+endfunction " RepeatTag()
+
+
+
+
+
+
+
+
+map ,c E:call InsertCloseTag()<CR>  
+map ,r :call RepeatTag(0)<CR>
+map ,R :call RepeatTag(1)<CR>
+
+
+" NERDTree mappings
+" http://www.vim.org/scripts/script.php?script_id=1658
+" Opens a fresh NERD tree. The root of the tree depends on the argument
+nmap <C-n>o :NERDTree<CR>
+" Opens a fresh NERD tree with the root initialized to the dir for <bookmark>
+nmap <C-n>b :NERDTreeFromBookmark 
+"If a NERD tree already exists for this tab, it is reopened and rendered
+nmap ,n :NERDTreeToggle<CR>
+" Find the current file in the tree. If no tree exists for the current tab,
+nmap <C-n>f :NERDTreeFind<CR>
+
+" make moving between windows a little quicker
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+
+autocmd BufEnter * if &filetype == "html" | call MapHTMLKeys() | endif
+function! MapHTMLKeys(...)
+" sets up various insert mode key mappings suitable for typing HTML, and
+" automatically removes them when switching to a non-HTML buffer
+
+  " if no parameter, or a non-zero parameter, set up the mappings:
+  if a:0 == 0 || a:1 != 0
+
+    " require two backslashes to get one:
+    inoremap \\ \
+
+    " then use backslash followed by various symbols insert HTML characters:
+    inoremap \& &amp;
+    inoremap \< &lt;
+    inoremap \> &gt;
+    "inoremap \. &middot;
+    inoremap \" &quot;
+
+    "inoremap \} &raquo;
+    "inoremap \{ &laquo;
+
+    " em dash -- have \- always insert an em dash, and also have _ do it if
+    " ever typed as a word on its own, but not in the middle of other words:
+    " inoremap \- &#8212;
+    " iabbrev _ &#8212;
+
+    " hard space with <Ctrl>+Space, and \<Space> for when that doesn't work:
+    inoremap \<Space> &nbsp;
+    imap <C-Space> \<Space>
+
+    " have the normal open and close single quote keys producing the character
+    " codes that will produce nice curved quotes (and apostophes) on both Unix
+    " and Windows:
+    "inoremap ` &#8216;
+    
+    "inoremap ' &#8217;
+    " then provide the original functionality with preceding backslashes:
+    "inoremap \` `
+    "inoremap \' '
+
+
+    
+    " when switching to a non-HTML buffer, automatically undo these mappings:
+    autocmd! BufLeave * call MapHTMLKeys(0)
+
+  " parameter of zero, so want to unmap everything:
+  else
+    iunmap \\
+    iunmap \&
+    iunmap \<
+    iunmap \>
+    "iunmap \-
+    "iunabbrev _
+    iunmap \<Space>
+    iunmap <C-Space>
+    "iunmap `
+    "iunmap '
+    "iunmap \`
+    "iunmap \'
+    "iunmap \"
+
+    " once done, get rid of the autocmd that called this:
+    autocmd! BufLeave *
+
+  endif " test for mapping/unmapping
+
+endfunction " MapHTMLKeys()
+
+
