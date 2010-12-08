@@ -170,7 +170,7 @@ set hidden
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-nmap <silent> <Leader>p :NERDTreeToggle<CR>
+" nmap <silent> <Leader>p :NERDTreeToggle<CR>
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -381,11 +381,11 @@ endif
 echo
 endfun
 
-" Map this function to Space key.
+" Map this function to Space key."{{{
 noremap <space> :call ToggleFold()<CR>
 nmap zz V%zf
 set foldmethod=marker
-
+"}}}
 
 
 " Google search
