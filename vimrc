@@ -7,15 +7,16 @@ set backspace=indent,eol,start
 "store lots of :cmdline history
 set history=1000
 
-" set showcmd     "show incomplete cmds down the bottom
+set showcmd     "show incomplete cmds down the bottom
 set showmode    "show current mode down the bottom
 
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
 
 " set number      "add line numbers
-set showbreak=>>>>
-set wrap linebreak nolist
+" set showbreak=>>>>
+" set wrap linebreak nolist
+set nowrap linebreak nolist
 
 "try to make possible to navigate within lines of wrapped lines
 " nmap <Down> gj
@@ -177,7 +178,7 @@ nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
 
 "map to bufexplorer
-nnoremap <leader>b :BufExplorer<cr>
+nnoremap ,b :BufExplorer<CR>
 
 "map to CommandT TextMate style finder
 nnoremap <leader>t :CommandT<CR>
@@ -260,17 +261,15 @@ endfunction
 set ignorecase
 set smartcase
 
-set nobackup
-set dir=~/.vimbackup
-nnoremap <F2> :e ~/.vim/vimrc<cr>
-nnoremap <F3> :source ~/.vim/vimrc<cr>
-nnoremap <F5> :!ruby %<CR>
-nnoremap <F6> :Rake! <CR>
-nnoremap <F7> :nohlsearch <cr>
-nnoremap <F9> :bw <cr>
+" set nobackup
+" set dir=~/.vimbackup
+" nnoremap <F2> :e ~/.vim/vimrc<cr>
+" nnoremap <F3> :source ~/.vim/vimrc<cr>
+" nnoremap <F5> :!ruby %<CR>
+" nnoremap <F6> :Rake! <CR>
+" nnoremap <F7> :nohlsearch <cr>
+" nnoremap <F9> :bw <cr>
 
-map <F12> \be
-imap <F12> <Esc>\be
 
 autocmd User Rails silent! Rnavcommand spm spec/models -glob=**/* -suffix=_spec.rb -default=model()
 autocmd User Rails silent! Rnavcommand spi spec/integration -glob=**/* -suffix=_spec.rb -default=model()
