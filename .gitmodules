@@ -73,3 +73,6 @@
 [submodule "snippets"]
 	path = snippets
 	url = https://github.com/underlog/snipmate-snippets.git
+[submodule "bundle/xml-vim"]
+	path = bundle/xml-vim
+	url = https://github.com/vim-scripts/xml.vim.git
