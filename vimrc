@@ -400,6 +400,7 @@ autocmd User Rails silent! Rnavcommand presenter app/presenters -suffix=_present
 autocmd User Rails silent! Rnavcommand uploader app/uploaders -suffix=_uploader.rb
 autocmd User Rails silent! Rnavcommand site config/site -suffix=.yml
 autocmd User Rails silent! Rnavcommand sass app/stylesheets -suffix=.scss
+autocmd User Rails silent! Rnavcommand javascript app/javascripts -suffix=.js
 
 " pick last command
 cmap <C-n> <Up>
