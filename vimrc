@@ -403,9 +403,6 @@ autocmd User Rails silent! Rnavcommand sass app/stylesheets -suffix=.scss
 
 autocmd FileType ruby inoremap <C-S-l> #{}<Left>
 
-" surround.vim hack for terminals.
-imap ß <C-G>s
-
 " pick last command
 cmap <C-n> <Up>
 
