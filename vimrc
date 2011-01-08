@@ -286,24 +286,6 @@ else
     colorscheme railscasts
 endif
 
-nmap <silent> <Leader>p :NERDTreeToggle<CR>
-
-"make <c-l> clear the highlight as well as redraw
-nnoremap <C-L> :nohls<CR><C-L>
-inoremap <C-L> <C-O>:nohls<CR>
-
-"map to bufexplorer
-nnoremap <leader>b :BufExplorer<cr>
-
-"map to CommandT TextMate style finder
-nnoremap <leader>t :CommandT<CR>
-
-"map Q to something useful
-noremap Q gq
-
-"make Y consistent with C and D
-nnoremap Y y$
-
 "bindings for ragtag
 inoremap <M-o>       <Esc>o
 inoremap <C-j>       <Down>
