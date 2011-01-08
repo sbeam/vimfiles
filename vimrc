@@ -401,8 +401,6 @@ autocmd User Rails silent! Rnavcommand uploader app/uploaders -suffix=_uploader.
 autocmd User Rails silent! Rnavcommand site config/site -suffix=.yml
 autocmd User Rails silent! Rnavcommand sass app/stylesheets -suffix=.scss
 
-autocmd FileType ruby inoremap <C-S-l> #{}<Left>
-
 " pick last command
 cmap <C-n> <Up>
 
