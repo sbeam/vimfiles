@@ -382,6 +382,8 @@ autocmd User Rails silent! Rnavcommand javascript app/javascripts -suffix=.js
 " pick last command
 cmap <C-n> <Up>
 
+autocmd FileType ruby inoremap <C-S-l> #{}<Left>
+
 nmap ,rv :Rview 
 nmap ,rm :Rmodel 
 nmap ,rc :Rcontroller 
