@@ -392,3 +392,5 @@ nmap ,rh :Rhelper
 nmap <Space> :
 imap <C-Space> <C-o>:
 
+autocmd BufWritePre * :%s/\s\+$//e
+
