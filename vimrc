@@ -271,8 +271,10 @@ if has("gui_running")
     endif
 
     if has("gui_mac") || has("gui_macvim")
-        set guifont=DejaVu\ Sans\ Mono:h12
+        set guifont=Menlo:h12
+        set linespace=4
         set columns=270
+        colorscheme jellybeans
         " make Mac's Option key behave as the Meta key
         set invmmta
     endif
