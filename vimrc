@@ -386,9 +386,9 @@ cmap <C-n> <Up>
 
 autocmd FileType ruby inoremap <C-S-l> #{}<Left>
 
-nmap ,rv :Rview 
-nmap ,rm :Rmodel 
-nmap ,rc :Rcontroller 
+nmap ,rv :Rview
+nmap ,rm :Rmodel
+nmap ,rc :Rcontroller
 nmap ,rh :Rhelper
 
 nmap <Space> :
