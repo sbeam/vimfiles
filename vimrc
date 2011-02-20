@@ -364,6 +364,11 @@ imap <C-Space> <C-o>:
 autocmd BufWritePre * :%s/\s\+$//e
 
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+
+" duplicate line, scite style.
+inoremap <D-d> <Esc>md"dyy"dp`dja
+noremap <D-d> md"dyy"dp`dj
+
 function! GoToWip()
   :LAck -a wip features/
 endfunction
