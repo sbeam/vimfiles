@@ -252,8 +252,7 @@ if has("gui_running")
     endif
 else
     "dont load csapprox if there is no gui support - silences an annoying warning
-    set t_Co=256
-    colorscheme railscasts
+    colorscheme default
 endif
 
 "bindings for ragtag
