@@ -374,3 +374,7 @@ function! GoToWip()
 endfunction
 
 command! Wip call GoToWip()
+
+set macmeta
+noremap <M-m> mB
+noremap <M-b> `B
