@@ -178,12 +178,6 @@ function! s:Median(nums)
     endif
 endfunction
 
-function! GoToWip()
-  :LAck -a wip features/
-endfunction
-
-command! Wip call GoToWip()
-
 "indent settings
 set shiftwidth=2
 set softtabstop=2
@@ -370,3 +364,8 @@ imap <C-Space> <C-o>:
 
 autocmd BufWritePre * :%s/\s\+$//e
 
+function! GoToWip()
+  :LAck -a wip features/
+endfunction
+
+command! Wip call GoToWip()
