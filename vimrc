@@ -240,9 +240,9 @@ if has("gui_running")
 
     if has("gui_mac") || has("gui_macvim")
         set guifont=Menlo:h12
-        set linespace=4
+        set linespace=3
         set columns=270
-        colorscheme jellybeans
+        colorscheme vividchalk
         " make Mac's Option key behave as the Meta key
         set invmmta
     endif
