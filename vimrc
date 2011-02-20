@@ -20,25 +20,9 @@ set number      "add line numbers
 set showbreak=...
 set wrap linebreak nolist
 
-"mapping for command key to map navigation through display lines instead
-"of just numbered lines
-vmap <D-j> gj
-vmap <D-k> gk
-vmap <D-4> g$
-vmap <D-6> g^
-vmap <D-0> g^
-nmap <D-j> gj
-nmap <D-k> gk
-nmap <D-4> g$
-nmap <D-6> g^
-nmap <D-0> g^
-
 "disable visual bell
 set visualbell t_vb=
 
-"try to make possible to navigate within lines of wrapped lines
-nmap <Down> gj
-nmap <Up> gk
 set fo=l
 
 "statusline setup
@@ -215,11 +199,6 @@ set wildmode=list:full   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 
-"display tabs and trailing spaces
-"set list
-"set listchars=tab:\ \ ,extends:>,precedes:<
-" disabling list because it interferes with soft wrap
-
 set formatoptions-=o "dont continue comments when pushing o/O
 
 "vertical/horizontal scroll off settings
@@ -246,11 +225,6 @@ set ttymouse=xterm2
 
 "hide buffers when not displayed
 set hidden
-
-"Command-T configuration
-let g:CommandTMaxHeight=10
-let g:CommandTMatchWindowAtTop=1
-
 
 if has("gui_running")
     "tell the term has 256 colors
