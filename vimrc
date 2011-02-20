@@ -364,6 +364,7 @@ imap <C-Space> <C-o>:
 
 autocmd BufWritePre * :%s/\s\+$//e
 
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 function! GoToWip()
   :LAck -a wip features/
 endfunction
