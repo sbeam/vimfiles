@@ -239,10 +239,10 @@ if has("gui_running")
   endif
 
   if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
+    set guifont=DejaVu\ Sans\ Mono:h12
     set linespace=3
     set columns=270
-    colorscheme vividchalk
+    colorscheme jellybeans
     " make Mac's Option key behave as the Meta key
     set macmeta
     noremap <M-m> mB
@@ -376,3 +376,8 @@ function! GoToWip()
 endfunction
 
 command! Wip call GoToWip()
+
+nmap ,gs :Gstatus<CR>
+nmap ,gd :Gdiff<CR>
+nmap ,gw :Gwrite<CR>
+nmap ,gc :Gcommit<CR>
