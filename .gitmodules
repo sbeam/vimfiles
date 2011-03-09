@@ -82,3 +82,6 @@
 [submodule "bundle/ClosePairs"]
 	path = bundle/ClosePairs
 	url = git://github.com/underlog/ClosePairs.git
+[submodule "bundle/extradite"]
+	path = bundle/extradite
+	url = https://github.com/int3/vim-extradite.git
