@@ -226,7 +226,7 @@ if has("gui_running")
 
   if has("gui_gtk")
     set t_Co=256
-    colorscheme railscasts
+    colorscheme jellybeans
     set guifont=DejaVu\ Sans\ Mono\ 8
     set columns=200
   endif
@@ -234,7 +234,7 @@ if has("gui_running")
   if has("gui_gnome")
     set term=gnome-256color
     set t_Co=256
-    colorscheme ir_dark
+    colorscheme jellybeans
     set guifont=DejaVu\ Sans\ Mono\ 12
   endif
 
@@ -245,10 +245,9 @@ if has("gui_running")
     colorscheme jellybeans
     set transparency=2
     " make Mac's Option key behave as the Meta key
-    set macmeta
-    noremap <M-m> mB
-    noremap <M-b> `B
+    set invmmta
   endif
+
   if has("gui_win32") || has("gui_win32s")
     set guifont=Consolas:h12
     set enc=utf-8
