@@ -383,7 +383,12 @@ nmap ,gd :Gdiff<CR>
 nmap ,gw :Gwrite<CR>
 nmap ,gc :Gcommit<CR>
 
-
 " Emacs (blasphemy!) shortcuts for cmd line editing
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+if has("gui_mac") || has("gui_macvim")
+  set macmeta
+  noremap <M-m> mB
+  noremap <M-b> `B
+endif
