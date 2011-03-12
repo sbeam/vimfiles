@@ -243,6 +243,7 @@ if has("gui_running")
     set linespace=3
     set columns=270
     colorscheme jellybeans
+    set transparency=2
     " make Mac's Option key behave as the Meta key
     set macmeta
     noremap <M-m> mB
@@ -359,6 +360,7 @@ nmap ,rv :Rview
 nmap ,rm :Rmodel
 nmap ,rc :Rcontroller
 nmap ,rh :Rhelper
+nmap ,rf :Rfeature
 
 nmap <Space> :
 imap <C-Space> <C-o>:
