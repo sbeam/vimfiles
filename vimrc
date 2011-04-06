@@ -215,7 +215,7 @@ syntax on
 
 "some stuff to get the mouse going in term
 set mouse=a
-set ttymouse=xterm2
+set ttymouse=xterm
 
 "hide buffers when not displayed
 set hidden
@@ -255,7 +255,8 @@ if has("gui_running")
   endif
 else
   "dont load csapprox if there is no gui support - silences an annoying warning
-  colorscheme default
+  set t_Co=256
+  colorscheme railscasts
 endif
 
 "bindings for ragtag
