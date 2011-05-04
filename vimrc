@@ -290,6 +290,8 @@ autocmd FileType ruby inoremap <C-S-l> #{}<Left>
 
 " surround.vim hack for terminals.
 imap ß <C-G>s
+" this should keep surround.vim from clobbering 's'
+xmap S <Plug>Vsurround
 
 " pick last command
 "cmap <C-n> <Up>
