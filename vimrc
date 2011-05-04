@@ -65,7 +65,7 @@ set statusline+=\ %P    "percent through file
 set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
-" set guioptions=c
+set guioptions-=T
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
