@@ -215,7 +215,7 @@ syntax on
 
 "some stuff to get the mouse going in term
 set mouse=a
-set ttymouse=xterm
+set ttymouse=xterm2
 
 "hide buffers when not displayed
 set hidden
@@ -256,7 +256,7 @@ if has("gui_running")
 else
   "dont load csapprox if there is no gui support - silences an annoying warning
   set t_Co=256
-  colorscheme railscasts
+  colorscheme jellybeans
 endif
 
 "bindings for ragtag
@@ -368,8 +368,6 @@ imap <C-Space> <C-o>:
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-
 " duplicate line, scite style.
 inoremap <D-d> <Esc>md"dyy"dp`dja
 noremap <D-d> md"dyy"dp`dj
@@ -384,3 +382,8 @@ nmap ,gs :Gstatus<CR>
 nmap ,gd :Gdiff<CR>
 nmap ,gw :Gwrite<CR>
 nmap ,gc :Gcommit<CR>
+
+
+" Emacs (blasphemy!) shortcuts for cmd line editing
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
