@@ -255,7 +255,8 @@ if has("gui_running")
 else
   "dont load csapprox if there is no gui support - silences an annoying warning
   set t_Co=256
-  colorscheme jellybeans
+  set background=light
+  colorscheme solarized
 endif
 
 "bindings for ragtag
