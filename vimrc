@@ -30,6 +30,7 @@ set fo=l
 
 "statusline setup
 set statusline=%f\        "tail of the filename
+"set statusline+=%{fugitive#statusline()}]
 set statusline+=%m      "modified flag
 set statusline+=%r      "read only flag
 set statusline+=%h      "help file flag
@@ -71,6 +72,9 @@ set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
 set guioptions-=T
+
+" use blowfish with :X and -x and such
+set cryptmethod=blowfish
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
@@ -161,8 +165,8 @@ filetype indent on
 syntax on
 
 "some stuff to get the mouse going in term
-set mouse=a
-set ttymouse=xterm2
+" set mouse=a
+" set ttymouse=xterm2
 
 "hide buffers when not displayed
 set hidden
