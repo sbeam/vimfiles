@@ -23,6 +23,11 @@ set nowrap linebreak nolist
 " nmap <Up> gk
 " set fo=l
 
+"disable visual bell
+set visualbell t_vb=
+
+set fo=l
+
 "statusline setup
 set statusline=%f\        "tail of the filename
 "set statusline+=%{fugitive#statusline()}]
@@ -77,24 +82,24 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
 function! StatuslineTrailingSpaceWarning()
-    if !exists("b:statusline_trailing_space_warning")
-        if search('\s\+$', 'nw') != 0
-            let b:statusline_trailing_space_warning = '[\s]'
-        else
-            let b:statusline_trailing_space_warning = ''
-        endif
+  if !exists("b:statusline_trailing_space_warning")
+    if search('\s\+$', 'nw') != 0
+      let b:statusline_trailing_space_warning = '[\s]'
+    else
+      let b:statusline_trailing_space_warning = ''
     endif
-    return b:statusline_trailing_space_warning
+  endif
+  return b:statusline_trailing_space_warning
 endfunction
 
 "return the syntax highlight group under the cursor ''
 function! StatuslineCurrentHighlight()
-    let name = synIDattr(synID(line('.'),col('.'),1),'name')
-    if name == ''
-        return ''
-    else
-        return '[' . name . ']'
-    endif
+  let name = synIDattr(synID(line('.'),col('.'),1),'name')
+  if name == ''
+    return ''
+  else
+    return '[' . name . ']'
+  endif
 endfunction
 
 "recalculate the tab warning flag when idle and after writing
@@ -104,24 +109,23 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 "return '[mixed-indenting]' if spaces and tabs are used to indent
 "return an empty string if everything is fine
 function! StatuslineTabWarning()
-    if !exists("b:statusline_tab_warning")
-        let tabs = search('^\t', 'nw') != 0
-        let spaces = search('^ ', 'nw') != 0
+  if !exists("b:statusline_tab_warning")
+    let tabs = search('^\t', 'nw') != 0
+    let spaces = search('^ ', 'nw') != 0
 
-        if tabs && spaces
-            let b:statusline_tab_warning =  '[mixed-indenting]'
-        elseif (spaces && !&et) || (tabs && &et)
-            let b:statusline_tab_warning = '[&et]'
-        else
-            let b:statusline_tab_warning = ''
-        endif
+    if tabs && spaces
+      let b:statusline_tab_warning =  '[mixed-indenting]'
+    elseif (spaces && !&et) || (tabs && &et)
+      let b:statusline_tab_warning = '[&et]'
+    else
+      let b:statusline_tab_warning = ''
     endif
-    return b:statusline_tab_warning
+  endif
+  return b:statusline_tab_warning
 endfunction
 
 "recalculate the long line warning when idle and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
-
 
 
 "indent settings
@@ -138,11 +142,6 @@ set nofoldenable        "dont fold by default
 set wildmode=list:full   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-
-"display tabs and trailing spaces
-"set list
-"set listchars=tab:\ \ ,extends:>,precedes:<
-" disabling list because it interferes with soft wrap
 
 set formatoptions-=o "dont continue comments when pushing o/O
 
@@ -193,19 +192,15 @@ nnoremap <leader>t :CommandT<CR>
 "make Y consistent with C and D
 nnoremap Y y$
 
+"
 "bindings for ragtag
 inoremap <M-o>       <Esc>o
 inoremap <C-j>       <Down>
+
 let g:ragtag_global_maps = 1
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
-
-"key mapping for vimgrep result navigation
-map <A-o> :copen<CR>
-map <A-q> :cclose<CR>
-map <A-j> :cnext<CR>
-map <A-k> :cprevious<CR>
 
 "snipmate setup
 try
@@ -216,23 +211,23 @@ endtry
 autocmd vimenter * call s:SetupSnippets()
 function! s:SetupSnippets()
 
-    "if we're in a rails env then read in the rails snippets
-    if filereadable("./config/environment.rb")
-        call ExtractSnips("~/.vim/snippets/ruby-rails", "ruby")
-        call ExtractSnips("~/.vim/snippets/eruby-rails", "eruby")
-    endif
+  "if we're in a rails env then read in the rails snippets
+  if filereadable("./config/environment.rb")
+    call ExtractSnips("~/.vim/snippets/ruby-rails", "ruby")
+    call ExtractSnips("~/.vim/snippets/eruby-rails", "eruby")
+  endif
 
-    call ExtractSnips("~/.vim/snippets/html", "eruby")
-    call ExtractSnips("~/.vim/snippets/html", "xhtml")
-    call ExtractSnips("~/.vim/snippets/html", "php")
+  call ExtractSnips("~/.vim/snippets/html", "eruby")
+  call ExtractSnips("~/.vim/snippets/html", "xhtml")
+  call ExtractSnips("~/.vim/snippets/html", "php")
 endfunction
 
 "visual search mappings
 function! s:VSetSearch()
-    let temp = @@
-    norm! gvy
-    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
 endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
@@ -242,24 +237,24 @@ vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 "dont do it when writing a commit log entry
 autocmd BufReadPost * call SetCursorPosition()
 function! SetCursorPosition()
-    if &filetype !~ 'commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal! g`\""
-            normal! zz
-        endif
-    end
+  if &filetype !~ 'commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$")
+      exe "normal! g`\""
+      normal! zz
+    endif
+  end
 endfunction
 
 "define :HighlightLongLines command to highlight the off#nding parts of
 "lines that are longer than the specified length (defaulting to 80)
 command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
 function! s:HighlightLongLines(width)
-    let targetWidth = a:width != '' ? a:width : 79
-    if targetWidth > 0
-        exec 'match Todo /\%>' . (targetWidth) . 'v/'
-    else
-        echomsg "Usage: HighlightLongLines [natural number]"
-    endif
+  let targetWidth = a:width != '' ? a:width : 79
+  if targetWidth > 0
+    exec 'match Todo /\%>' . (targetWidth) . 'v/'
+  else
+    echomsg "Usage: HighlightLongLines [natural number]"
+  endif
 endfunction
 
 set ignorecase
@@ -289,24 +284,25 @@ autocmd User Rails silent! Rnavcommand uploader app/uploaders -suffix=_uploader.
 autocmd User Rails silent! Rnavcommand site config/site -suffix=.yml
 autocmd User Rails silent! Rnavcommand sass app/stylesheets -suffix=.scss
 
-autocmd FileType ruby inoremap <C-S-l> #{}<Left>
-
-" surround.vim hack for terminals.
-imap ß <C-G>s
 " this should keep surround.vim from clobbering 's'
 xmap S <Plug>Vsurround
+autocmd User Rails silent! Rnavcommand javascript app/javascripts -suffix=.js
 
 " pick last command
 "cmap <C-n> <Up>
 
-nmap ,rv :Rview 
-nmap ,rm :Rmodel 
-nmap ,rc :Rcontroller 
+autocmd FileType ruby inoremap <C-S-l> #{}<Left>
+
+nmap ,rv :Rview
+nmap ,rm :Rmodel
+nmap ,rc :Rcontroller
+nmap ,rh :Rhelper
+nmap ,rf :Rfeature
+
+nmap ,rh :Rhelper
 
 " nmap <Space> :
 " imap <C-Space> <C-o>:
-
-nmap ,rh :Rhelper
 
 
 "
@@ -351,12 +347,12 @@ hi phpSwitch guifg=#cc3333
 
 if version >= 600
      filetype plugin indent on
-endif 
+endif
 runtime macros/matchit.vim
 
 
 " show taglist window with ctags for the file.
-map ,t :TlistToggle<CR>   
+map ,t :TlistToggle<CR>
 "let Tlist_Auto_Open  = 1
 let Tlist_Use_Right_Window = 1
 "set Tlist_Show_Menu 1
@@ -429,21 +425,20 @@ endif
 
 function! PHPmapper()
     " PHP debug dump selected thing to stdout, with print_r
-    vmap ,p yoprint '<pre>DEBUG at line '.__LINE__.' of ' . __FILE__ . "\n";<CR>print_r(<ESC>pA);<CR>print '</pre>';<ESC> 
+    vmap ,p yoprint '<pre>DEBUG at line '.__LINE__.' of ' . __FILE__ . "\n";<CR>print_r(<ESC>pA);<CR>print '</pre>';<ESC>
     " PHP debug dump to error_log
-    vmap ,e yo/* DEBUG */ ob_start(); print "=======\nDEBUG ".date('r')."\nline ".__LINE__." of ".__FILE__."\n";<CR>print_r(<ESC>pA);<CR>print "\n\n"; error_log(ob_get_clean(),3,'/tmp/phpdebug.log');<ESC>
-    
+
     map <F9> :w<CR>:!/usr/bin/php -l %<CR>
-   
+
     " load PHP on Alt-P
     map <M-p> :sil! !/usr/bin/firefox -remote "openURL(http://www.php.net/<cword>, new-tab)"<CR>;;
-endfunction 
+endfunction
 
 
 
 
 
-map ,c E:call InsertCloseTag()<CR>  
+map ,c E:call InsertCloseTag()<CR>
 map ,r :call RepeatTag(0)<CR>
 map ,R :call RepeatTag(1)<CR>
 
@@ -453,7 +448,7 @@ map ,R :call RepeatTag(1)<CR>
 " Opens a fresh NERD tree. The root of the tree depends on the argument
 nmap <C-n>o :NERDTree<CR>
 " Opens a fresh NERD tree with the root initialized to the dir for <bookmark>
-nmap <C-n>b :NERDTreeFromBookmark 
+nmap <C-n>b :NERDTreeFromBookmark
 "If a NERD tree already exists for this tab, it is reopened and rendered
 nmap ,n :NERDTreeToggle<CR>
 " Find the current file in the tree. If no tree exists for the current tab,
@@ -471,10 +466,36 @@ map <C-l> <C-w>l
 " highlight trailing whitespace in red
 " have this highlighting not appear whilst you are typing in insert mode
 " have the highlighting of whitespace apply when you open new buffers
-highlight ExtraWhitespace ctermbg=red guibg=red  
+highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+autocmd BufWritePre * :%s/\s\+$//e
+
+" duplicate line, scite style.
+inoremap <D-d> <Esc>md"dyy"dp`dja
+noremap <D-d> md"dyy"dp`dj
+
+function! GoToWip()
+  :LAck -a wip features/
+endfunction
+
+command! Wip call GoToWip()
+
+nmap ,gs :Gstatus<CR>
+nmap ,gd :Gdiff<CR>
+nmap ,gw :Gwrite<CR>
+nmap ,gc :Gcommit<CR>
+
+" shortcuts for cmd line editing
+cnoremap <C-l> <Home>
+cnoremap <C-h> <End>
+
+if has("gui_mac") || has("gui_macvim")
+  set macmeta
+  noremap <M-m> mB
+  noremap <M-b> `B
+endif
