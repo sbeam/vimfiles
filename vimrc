@@ -76,6 +76,12 @@ set guioptions-=T
 " use blowfish with :X and -x and such
 set cryptmethod=blowfish
 
+
+" mapping for Fuzzy Finder
+nmap ,ff :FufCoverageFile<CR>
+nmap ,fb :FufBuffer<CR>
+nmap ,fj :FufJumpList<CR>
+
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
