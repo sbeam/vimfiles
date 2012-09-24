@@ -468,12 +468,15 @@ autocmd BufWinLeave * call clearmatches()
 
 autocmd BufWritePre * :%s/\s\+$//e
 
+" \W will clear those pesky spaces
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
 " duplicate line, scite style.
 inoremap <D-d> <Esc>md"dyy"dp`dja
 noremap <D-d> md"dyy"dp`dj
 
 function! GoToWip()
-  :LAck -a wip features/
+  :LAck -a wip
 endfunction
 
 command! Wip call GoToWip()
