@@ -43,9 +43,6 @@
 [submodule "bundle/pastie"]
 	path = bundle/pastie
 	url = git://github.com/tpope/vim-pastie.git
-[submodule "bundle/Command-T"]
-	path = bundle/Command-T
-	url = git://github.com/akitaonrails/Command-T.git
 [submodule "bundle/textile"]
 	path = bundle/textile
 	url = http://github.com/timcharper/textile.vim.git
@@ -67,9 +64,6 @@
 [submodule "bundle/vim-rake"]
 	path = bundle/vim-rake
 	url = http://github.com/tpope/vim-rake.git
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "snippets"]
 	path = snippets
 	url = https://github.com/underlog/snipmate-snippets.git
