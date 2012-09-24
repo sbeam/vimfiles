@@ -24,7 +24,7 @@ set nowrap linebreak nolist
 " set fo=l
 
 "disable visual bell
-set visualbell t_vb=
+set novisualbell
 
 set fo=l
 
