@@ -498,3 +498,10 @@ if has("gui_mac") || has("gui_macvim")
   noremap <M-m> mB
   noremap <M-b> `B
 endif
+
+
+" I'm tired of clearing highlights by searching for /lsdnosw
+nmap <silent> ,/ :nohlsearch<CR>
+
+" switch to paste mode, so you can paste code into a window without getting all auto-indented
+set pastetoggle=<F10>
