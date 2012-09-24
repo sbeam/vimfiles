@@ -4,7 +4,7 @@
 "=============================================================================
 "    Copyright: Copyright (C) 2007 Sam Ghods
 "      License:	The MIT License
-"				
+"
 "				Permission is hereby granted, free of charge, to any person obtaining
 "				a copy of this software and associated documentation files
 "				(the "Software"), to deal in the Software without restriction,
@@ -12,10 +12,10 @@
 "				merge, publish, distribute, sublicense, and/or sell copies of the
 "				Software, and to permit persons to whom the Software is furnished
 "				to do so, subject to the following conditions:
-"				
+"
 "				The above copyright notice and this permission notice shall be included
 "				in all copies or substantial portions of the Software.
-"				
+"
 "				THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 "				OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 "				MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -39,7 +39,7 @@
 "
 "               This file should reside in the plugins directory along
 "               with debugger.py and be automatically sourced.
-"               
+"
 "               By default, the script expects the debugging engine to connect
 "               on port 9000. You can change this with the g:debuggerPort
 "               variable by putting the following line your vimrc:
@@ -91,7 +91,7 @@
 "                     o Added support for minibufexpl.vim.
 "                     o License added.
 "               1.0   o Initial release on December 7, 2004
-"      
+"
 " Known Issues: The code is designed for the DBGp protocol, but it has only been
 " 				tested with XDebug 2.0RC4. If anyone would like to contribute patches
 " 				to get it working with other DBGp software, I would be happy
@@ -102,7 +102,7 @@
 " 				so on... if you can actually find a set of solidly
 " 				reproducible steps that lead to a bug, please do e-mail <sam
 " 				<at> box.net> and I will take a look.
-" 
+"
 "         Todo: Compatibility for other DBGp engines.
 "
 "         		Add a status line/window which constantly shows what the current
@@ -127,29 +127,29 @@ else
   call confirm('debugger.vim: Unable to find debugger.py. Place it in either your home vim directory or in the Vim runtime directory.', 'OK')
 endif
 
-map <F1> :python debugger_resize()<cr>
-map <F2> :python debugger_command('step_into')<cr>
-map <F3> :python debugger_command('step_over')<cr>
-map <F4> :python debugger_command('step_out')<cr>
+"map <Leader>p<F1> :python debugger_resize()<cr>
+"map <Leader>p<F2> :python debugger_command('step_into')<cr>
+"map <Leader>p<F3> :python debugger_command('step_over')<cr>
+"map <Leader>p<F4> :python debugger_command('step_out')<cr>
 
-map <Leader>dr :python debugger_resize()<cr>
-map <Leader>di :python debugger_command('step_into')<cr>
-map <Leader>do :python debugger_command('step_over')<cr>
-map <Leader>dt :python debugger_command('step_out')<cr>
+map <Leader>pdr :python debugger_resize()<cr>
+map <Leader>pdi :python debugger_command('step_into')<cr>
+map <Leader>pdo :python debugger_command('step_over')<cr>
+map <Leader>pdt :python debugger_command('step_out')<cr>
 
 nnoremap ,e :python debugger_watch_input("eval")<cr>A
 
-map <F5> :python debugger_run()<cr>
-map <F6> :python debugger_quit()<cr>
+map <Leader>p<F5> :python debugger_run()<cr>
+map <Leader>p<F6> :python debugger_quit()<cr>
 
-map <F7> :python debugger_command('step_into')<cr>
-map <F8> :python debugger_command('step_over')<cr>
-map <F9> :python debugger_command('step_out')<cr>
+map <Leader>p<F7> :python debugger_command('step_into')<cr>
+map <Leader>p<F8> :python debugger_command('step_over')<cr>
+map <Leader>p<F9> :python debugger_command('step_out')<cr>
 
-map <F11> :python debugger_context()<cr>
-map <F12> :python debugger_property()<cr>
-map <F11> :python debugger_watch_input("context_get")<cr>A<cr>
-map <F12> :python debugger_watch_input("property_get", '<cword>')<cr>A<cr>
+map <Leader>p<F11> :python debugger_context()<cr>
+map <Leader>p<F12> :python debugger_property()<cr>
+map <Leader>p<F11> :python debugger_watch_input("context_get")<cr>A<cr>
+map <Leader>p<F12> :python debugger_watch_input("property_get", '<cword>')<cr>A<cr>
 
 hi DbgCurrent term=reverse ctermfg=White ctermbg=Red gui=reverse
 hi DbgBreakPt term=reverse ctermfg=White ctermbg=Green gui=reverse
@@ -162,7 +162,7 @@ sign define breakpt text=B>  texthl=DbgBreakPt linehl=DbgBreakPt
 
 if !exists('g:debuggerPort')
   let g:debuggerPort = 9000
-endif 
+endif
 if !exists('g:debuggerMaxChildren')
   let g:debuggerMaxChildren = 32
 endif
