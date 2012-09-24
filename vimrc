@@ -494,6 +494,9 @@ nmap ,gc :Gcommit<CR>
 cnoremap <C-l> <Home>
 cnoremap <C-h> <End>
 
+" shortcut for Extradite plugin
+nmap ,e :Extradite!<CR>
+
 if has("gui_mac") || has("gui_macvim")
   set macmeta
   noremap <M-m> mB
