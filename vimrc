@@ -465,6 +465,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" resize vertically with + and _ in normal mode
+nmap + <C-w>>
+nmap _ <C-w><
+
 
 
 
