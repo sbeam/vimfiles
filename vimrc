@@ -77,6 +77,12 @@ set guioptions-=T
 set cryptmethod=blowfish
 
 
+" for CamelCaseMotion plugin (people actually use this??)
+map <silent> ;w <Plug>CamelCaseMotion_w
+map <silent> ;b <Plug>CamelCaseMotion_b
+map <silent> ;e <Plug>CamelCaseMotion_e
+
+
 " mapping for Fuzzy Finder
 nmap ,ff :FufCoverageFile<CR>
 nmap ,fb :FufBuffer<CR>
