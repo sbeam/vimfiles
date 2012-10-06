@@ -86,10 +86,6 @@
 	path = bundle/vim-rake
 	url = http://github.com/tpope/vim-rake.git
     ignore = untracked
-[submodule "snippets"]
-	path = snippets
-	url = https://github.com/underlog/snipmate-snippets.git
-    ignore = untracked
 [submodule "bundle/vim-ruby-debugger"]
 	path = bundle/vim-ruby-debugger
 	url = git://github.com/astashov/vim-ruby-debugger.git
