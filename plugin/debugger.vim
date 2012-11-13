@@ -137,7 +137,7 @@ map <Leader>pdi :python debugger_command('step_into')<cr>
 map <Leader>pdo :python debugger_command('step_over')<cr>
 map <Leader>pdt :python debugger_command('step_out')<cr>
 
-nnoremap ,e :python debugger_watch_input("eval")<cr>A
+nnoremap <Leader>e :python debugger_watch_input("eval")<cr>A
 
 map <Leader>p<F5> :python debugger_run()<cr>
 map <Leader>p<F6> :python debugger_quit()<cr>
