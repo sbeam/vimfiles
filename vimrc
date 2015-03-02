@@ -8,7 +8,7 @@ set backspace=indent,eol,start
 set history=1000
 
 set showcmd     "show incomplete cmds down the bottom
-set showmode    "show current mode down the bottom
+set noshowmode    " dont show current mode down the bottom
 
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
@@ -28,46 +28,46 @@ set novisualbell
 
 set fo=l
 
-"statusline setup
-set statusline=%f\        "tail of the filename
-"set statusline+=%{fugitive#statusline()}]
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%h      "help file flag
-set statusline+=%=      "left/right separator
+"   "statusline setup
+"   set statusline=%f\        "tail of the filename
+"   "set statusline+=%{fugitive#statusline()}]
+"   set statusline+=%m      "modified flag
+"   set statusline+=%r      "read only flag
+"   set statusline+=%h      "help file flag
+"   set statusline+=%=      "left/right separator
 
-"display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
-"display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
+"   "display a warning if fileformat isnt unix
+"   set statusline+=%#warningmsg#
+"   set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+"   set statusline+=%*
+"   "display a warning if file encoding isnt utf-8
+"   set statusline+=%#warningmsg#
+"   set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+"   set statusline+=%*
 
 
-set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
-set statusline+=%y\       "filetype
+"   set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
+"   set statusline+=%y\       "filetype
 
-"display a warning if &et is wrong, or we have mixed-indenting
-set statusline+=%#warningmsg#
-set statusline+=%{StatuslineTabWarning()}
-set statusline+=%*
+"   "display a warning if &et is wrong, or we have mixed-indenting
+"   set statusline+=%#warningmsg#
+"   set statusline+=%{StatuslineTabWarning()}
+"   set statusline+=%*
 
-" set statusline+=%{StatuslineTrailingSpaceWarning()}
+"   " set statusline+=%{StatuslineTrailingSpaceWarning()}
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"   set statusline+=%#warningmsg#
+"   set statusline+=%{SyntasticStatuslineFlag()}
+"   set statusline+=%*
 
-"display a warning if &paste is set
-set statusline+=%#error#
-set statusline+=%{&paste?'[paste]':''}
-set statusline+=%*
+"   "display a warning if &paste is set
+"   set statusline+=%#error#
+"   set statusline+=%{&paste?'[paste]':''}
+"   set statusline+=%*
 
-set statusline+=%c,     "cursor column
-set statusline+=%l   "cursor line/total lines
-set statusline+=\ %P    "percent through file
+"   set statusline+=%c,     "cursor column
+"   set statusline+=%l   "cursor line/total lines
+"   set statusline+=\ %P    "percent through file
 set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
@@ -321,7 +321,27 @@ set smartindent
 set wmh=0
 set foldcolumn=1
 
-colorscheme sam
+" airline
+if !has('gui_running')
+  set t_Co=256
+endif
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'filename' ],
+      \             [ 'paste', 'readonly', 'fugitive', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'separator': { 'left': '›', 'right': '' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+
+
+
+colorscheme molokai
 hi Cursor gui=reverse guifg=NONE guibg=NONE
 hi phpSwitch guifg=#cc3333
 
@@ -387,7 +407,6 @@ map <M-n> :%s/\r/\r/g<CR>
 
 " mainly done to avoid Ex mode annoyance when fat fingering Q
 nmap Q :reg<CR>
-
 
 function! InsertTabWrapper(direction)
     let col = col('.') - 1
