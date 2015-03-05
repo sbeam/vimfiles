@@ -62,10 +62,6 @@
 	path = bundle/textile
 	url = http://github.com/timcharper/textile.vim.git
     ignore = untracked
-[submodule "bundle/ir_black"]
-	path = bundle/ir_black
-	url = https://github.com/underlog/ir_black.git
-    ignore = untracked
 [submodule "bundle/vim-ruby"]
 	path = bundle/vim-ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
@@ -113,4 +109,12 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+    ignore = untracked
+[submodule "bundle/lightline.vim"]
+	path = bundle/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
+    ignore = untracked
+[submodule "bundle/ir_black"]
+    path = bundle/ir_black
+    url = https://github.com/underlog/ir_black.git
     ignore = untracked
