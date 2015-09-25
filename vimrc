@@ -299,6 +299,7 @@ let color = "true"
 if has("syntax")
     if color == "true"
         " This will switch colors ON
+        set t_Co=256
         so ${VIMRUNTIME}/syntax/syntax.vim
     else
         " this switches colors OFF
@@ -341,8 +342,11 @@ let g:lightline = {
 
 
 
+let g:molokai_original = 1
+let g:rehash256 = 1
 colorscheme molokai
-hi Cursor gui=reverse guifg=NONE guibg=NONE
+hi Cursor gui=reverse guifg=NONE guibg=black
+hi iCursor gui=reverse guifg=NONE guibg=steelblue
 hi phpSwitch guifg=#cc3333
 
 :map ,m :w<CR>
