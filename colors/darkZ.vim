@@ -72,13 +72,13 @@ hi Visual       cterm=reverse
 hi VisualNOS    cterm=bold,underline
 hi WarningMsg   ctermfg=1
 hi WildMenu     ctermfg=0            ctermbg=3
-hi Folded       ctermfg=darkgrey     ctermbg=NONE
-hi FoldColumn   ctermfg=darkgrey     ctermbg=NONE
+hi Folded       ctermfg=darkcyan     ctermbg=NONE
+hi FoldColumn   ctermfg=darkcyan     ctermbg=NONE
 hi DiffAdd      ctermbg=4
 hi DiffChange   ctermbg=5
 hi DiffDelete   cterm=bold           ctermfg=4         ctermbg=6
 hi DiffText     cterm=bold           ctermbg=1
-hi Comment      ctermfg=darkcyan
+hi Comment      ctermfg=darkgrey
 hi Constant     ctermfg=brown
 hi Special      ctermfg=5
 hi Identifier   ctermfg=6
@@ -88,4 +88,4 @@ hi Type         ctermfg=2
 hi Underlined   cterm=underline      ctermfg=5
 hi Ignore       ctermfg=darkgrey
 hi Error        cterm=bold           ctermfg=7         ctermbg=1
-
+hi MatchParen	ctermfg=NONE         ctermbg=darkcyan
