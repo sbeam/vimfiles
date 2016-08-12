@@ -76,7 +76,6 @@ set guioptions-=T
 " use blowfish with :X and -x and such
 set cryptmethod=blowfish
 
-
 " for CamelCaseMotion plugin (people actually use this??)
 map <silent> ;w <Plug>CamelCaseMotion_w
 map <silent> ;b <Plug>CamelCaseMotion_b
@@ -520,7 +519,6 @@ if has("gui_mac") || has("gui_macvim")
   noremap <M-b> `B
 endif
 
-
 " I'm tired of clearing highlights by searching for /lsdnosw
 nmap <silent> ,/ :nohlsearch<CR>
 
@@ -529,7 +527,6 @@ set pastetoggle=<F10>
 
 " :Ag integration
 set runtimepath^=~/.vim/bundle/ag
-
 
 
 " http://pig-monkey.com/2013/04/password-management-vim-gnupg/
@@ -562,3 +559,8 @@ function SetGPGOptions()
 " Only open folds with insert commands.
     set foldopen=insert
 endfunction
+
+
+" use silver searcher/ag if install with Ack plugin
+" https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
+let g:ackprg = 'ag --vimgrep'
