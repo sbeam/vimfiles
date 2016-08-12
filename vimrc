@@ -56,9 +56,9 @@ set fo=l
 
 "   " set statusline+=%{StatuslineTrailingSpaceWarning()}
 
-"   set statusline+=%#warningmsg#
-"   set statusline+=%{SyntasticStatuslineFlag()}
-"   set statusline+=%*
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
 "   "display a warning if &paste is set
 "   set statusline+=%#error#
@@ -205,6 +205,10 @@ let g:ragtag_global_maps = 1
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "visual search mappings
 function! s:VSetSearch()
