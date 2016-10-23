@@ -114,3 +114,6 @@
     path = bundle/vim-pencil
     url = https://github.com/reedes/vim-pencil
     ignore = untracked
+[submodule "bundle/splitjoin"]
+	path = bundle/splitjoin
+	url = https://github.com/AndrewRadev/splitjoin.vim.git
