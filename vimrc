@@ -551,7 +551,8 @@ augroup GnuPGExtra
 " Set extra file options.
     autocmd BufReadCmd,FileReadCmd *.\(gpg\|asc\|pgp\) call SetGPGOptions()
 " Automatically close unmodified files after inactivity.
-    autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+" don't do it - CursorHold is triggering after any search, very odd
+    " autocmd CursorHold *\(gpg\|asc\|pgp\) nested update | quit
 augroup END
 
 function SetGPGOptions()
