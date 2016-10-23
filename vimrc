@@ -147,9 +147,9 @@ set expandtab
 set autoindent
 
 "folding settings
-set foldmethod=indent   "fold based on indent
+set foldmethod=marker   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
+set foldenable          "enable folding
 
 set wildmode=list:full   "make cmdline tab completion similar to bash
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
@@ -526,3 +526,39 @@ nmap <silent> ,/ :nohlsearch<CR>
 
 " switch to paste mode, so you can paste code into a window without getting all auto-indented
 set pastetoggle=<F10>
+
+" :Ag integration
+set runtimepath^=~/.vim/bundle/ag
+
+
+
+" http://pig-monkey.com/2013/04/password-management-vim-gnupg/
+""""""""""""""""""""
+" GnuPG Extensions "
+""""""""""""""""""""
+
+" Tell the GnuPG plugin to armor new files.
+let g:GPGPreferArmor=1
+
+" Tell the GnuPG plugin to sign new files.
+let g:GPGPreferSign=1
+
+augroup GnuPGExtra
+" Set extra file options.
+    autocmd BufReadCmd,FileReadCmd *.\(gpg\|asc\|pgp\) call SetGPGOptions()
+" Automatically close unmodified files after inactivity.
+    autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+augroup END
+
+function SetGPGOptions()
+" Set updatetime to 1 minute.
+    set updatetime=60000
+" fold
+    set foldenable
+" Fold at markers.
+    set foldmethod=marker
+" Automatically close all folds.
+    set foldclose=all
+" Only open folds with insert commands.
+    set foldopen=insert
+endfunction
