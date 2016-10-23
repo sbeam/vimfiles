@@ -56,9 +56,9 @@ set fo=l
 
 "   " set statusline+=%{StatuslineTrailingSpaceWarning()}
 
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 "   "display a warning if &paste is set
 "   set statusline+=%#error#
@@ -93,24 +93,24 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
 function! StatuslineTrailingSpaceWarning()
-  if !exists("b:statusline_trailing_space_warning")
-    if search('\s\+$', 'nw') != 0
-      let b:statusline_trailing_space_warning = '[\s]'
-    else
-      let b:statusline_trailing_space_warning = ''
+    if !exists("b:statusline_trailing_space_warning")
+        if search('\s\+$', 'nw') != 0
+            let b:statusline_trailing_space_warning = '[\s]'
+        else
+            let b:statusline_trailing_space_warning = ''
+        endif
     endif
-  endif
-  return b:statusline_trailing_space_warning
+    return b:statusline_trailing_space_warning
 endfunction
 
 "return the syntax highlight group under the cursor ''
 function! StatuslineCurrentHighlight()
-  let name = synIDattr(synID(line('.'),col('.'),1),'name')
-  if name == ''
-    return ''
-  else
-    return '[' . name . ']'
-  endif
+    let name = synIDattr(synID(line('.'),col('.'),1),'name')
+    if name == ''
+        return ''
+    else
+        return '[' . name . ']'
+    endif
 endfunction
 
 "recalculate the tab warning flag when idle and after writing
@@ -120,19 +120,19 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 "return '[mixed-indenting]' if spaces and tabs are used to indent
 "return an empty string if everything is fine
 function! StatuslineTabWarning()
-  if !exists("b:statusline_tab_warning")
-    let tabs = search('^\t', 'nw') != 0
-    let spaces = search('^ ', 'nw') != 0
+    if !exists("b:statusline_tab_warning")
+        let tabs = search('^\t', 'nw') != 0
+        let spaces = search('^ ', 'nw') != 0
 
-    if tabs && spaces
-      let b:statusline_tab_warning =  '[mixed-indenting]'
-    elseif (spaces && !&et) || (tabs && &et)
-      let b:statusline_tab_warning = '[&et]'
-    else
-      let b:statusline_tab_warning = ''
+        if tabs && spaces
+            let b:statusline_tab_warning =  '[mixed-indenting]'
+        elseif (spaces && !&et) || (tabs && &et)
+            let b:statusline_tab_warning = '[&et]'
+        else
+            let b:statusline_tab_warning = ''
+        endif
     endif
-  endif
-  return b:statusline_tab_warning
+    return b:statusline_tab_warning
 endfunction
 
 "recalculate the long line warning when idle and after saving
@@ -212,10 +212,10 @@ let g:syntastic_check_on_wq = 0
 
 "visual search mappings
 function! s:VSetSearch()
-  let temp = @@
-  norm! gvy
-  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-  let @@ = temp
+    let temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = temp
 endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
@@ -225,24 +225,24 @@ vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 "dont do it when writing a commit log entry
 autocmd BufReadPost * call SetCursorPosition()
 function! SetCursorPosition()
-  if &filetype !~ 'commit\c'
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal! g`\""
-      normal! zz
-    endif
-  end
+    if &filetype !~ 'commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal! g`\""
+            normal! zz
+        endif
+    end
 endfunction
 
 "define :HighlightLongLines command to highlight the off#nding parts of
 "lines that are longer than the specified length (defaulting to 80)
 command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
 function! s:HighlightLongLines(width)
-  let targetWidth = a:width != '' ? a:width : 79
-  if targetWidth > 0
-    exec 'match Todo /\%>' . (targetWidth) . 'v/'
-  else
-    echomsg "Usage: HighlightLongLines [natural number]"
-  endif
+    let targetWidth = a:width != '' ? a:width : 79
+    if targetWidth > 0
+        exec 'match Todo /\%>' . (targetWidth) . 'v/'
+    else
+        echomsg "Usage: HighlightLongLines [natural number]"
+    endif
 endfunction
 
 set ignorecase
@@ -327,21 +327,21 @@ set foldcolumn=1
 
 " airline
 if !has('gui_running')
-  set t_Co=256
+    set t_Co=256
 endif
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'filename' ],
-      \             [ 'paste', 'readonly', 'fugitive', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'separator': { 'left': '›', 'right': '' },
-      \ 'subseparator': { 'left': '|', 'right': '|' }
-      \ }
+            \ 'active': {
+            \   'left': [ [ 'filename' ],
+            \             [ 'paste', 'readonly', 'fugitive', 'modified' ] ]
+            \ },
+            \ 'component': {
+            \   'readonly': '%{&readonly?"":""}',
+            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+            \ },
+            \ 'separator': { 'left': '›', 'right': '' },
+            \ 'subseparator': { 'left': '|', 'right': '|' }
+            \ }
 
 
 
@@ -358,7 +358,7 @@ hi phpSwitch guifg=#cc3333
 :map ,d :r! date<CR>
 
 if version >= 600
-     filetype plugin indent on
+    filetype plugin indent on
 endif
 runtime macros/matchit.vim
 
@@ -381,17 +381,17 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 " If there is no fold at current line, just moves forward.
 " If it is present, reverse it's state.
 fun! ToggleFold()
-if foldlevel('.') == 0
-normal! l
-else
-if foldclosed('.') < 0
-. foldclose
-else
-. foldopen
-endif
-endif
-" Clear status line
-echo
+    if foldlevel('.') == 0
+        normal! l
+    else
+        if foldclosed('.') < 0
+            . foldclose
+        else
+            . foldopen
+        endif
+    endif
+    " Clear status line
+    echo
 endfun
 
 " Map this function to Space key."{{{
@@ -477,6 +477,9 @@ nmap <M-_> <C-w><
 " and vertically with - and =
 nmap <M--> <C-w>-
 nmap <M-=> <C-w>+
+
+nmap <silent> + :exe "resize " . (winheight(0) * 2)<CR>
+nmap <silent> _ :exe "resize " . (winheight(0) / 2)<CR>
 
 
 
