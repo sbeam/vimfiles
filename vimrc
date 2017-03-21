@@ -312,12 +312,13 @@ if has("syntax")
 endif
 
 
-set sw=4
-set ts=4
+set sw=2
+set ts=2
 set expandtab
 
 " set guifont=Andale\ Mono\ 9
-set guifont=MiscFixed\ Semi-Condensed\ 9
+" set guifont=MiscFixed\ Semi-Condensed\ 9
+" set guifont=Monaco\ for\ Powerline
 
 set formatoptions=tcql
 set ruler
@@ -359,8 +360,6 @@ let Tlist_Use_Right_Window = 1
 let Tlist_File_Fold_Auto_Close = 1
 " let Tlist_Close_On_Select = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
-
-
 
 " ~/.vimrc ends here
 
