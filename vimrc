@@ -329,21 +329,9 @@ set foldcolumn=1
 if !has('gui_running')
     set t_Co=256
 endif
-let g:lightline = {
-            \ 'active': {
-            \   'left': [ [ 'filename' ],
-            \             [ 'paste', 'readonly', 'fugitive', 'modified' ] ]
-            \ },
-            \ 'component': {
-            \   'readonly': '%{&readonly?"":""}',
-            \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-            \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-            \ },
-            \ 'separator': { 'left': '›', 'right': '' },
-            \ 'subseparator': { 'left': '|', 'right': '|' }
-            \ }
 
-
+let g:airline_powerline_fonts = 1
+let g:airline_theme='kolor'
 
 let g:molokai_original = 1
 let g:rehash256 = 1
