@@ -116,6 +116,15 @@ endfunction
 "recalculate the tab warning flag when idle and after writing
 autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 
+" use standard to check JS https://github.com/feross/standard
+let g:syntastic_javascript_checkers = ['standard']
+" autocmd bufwritepost *.js silent !standard --fix %
+set autoread
+
+" rubocop linter
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+
+
 "return '[&et]' if &et is set wrong
 "return '[mixed-indenting]' if spaces and tabs are used to indent
 "return an empty string if everything is fine
