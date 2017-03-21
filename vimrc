@@ -522,6 +522,8 @@ set pastetoggle=<F10>
 " :Ag integration
 set runtimepath^=~/.vim/bundle/ag
 
+" use Ag on vis selection!!!!
+:vmap ,g y:Ag <C-R>0<CR?>
 
 " http://pig-monkey.com/2013/04/password-management-vim-gnupg/
 """"""""""""""""""""
