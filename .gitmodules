@@ -50,10 +50,6 @@
 	path = bundle/snipmate
 	url = git://github.com/akitaonrails/snipmate.vim.git
     ignore = untracked
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
-    ignore = untracked
 [submodule "bundle/pastie"]
 	path = bundle/pastie
 	url = git://github.com/tpope/vim-pastie.git
@@ -117,3 +113,6 @@
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
 	url = https://github.com/AndrewRadev/splitjoin.vim.git
+[submodule "bundle/ale"]
+	path = bundle/ale
+	url = https://github.com/w0rp/ale.git

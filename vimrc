@@ -56,8 +56,16 @@ set fo=l
 
 "   " set statusline+=%{StatuslineTrailingSpaceWarning()}
 
+" settings for ALE linter
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠ '
+let g:ale_lint_delay = 4000
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
 
 "   "display a warning if &paste is set
@@ -117,13 +125,6 @@ endfunction
 autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 
 " use standard to check JS https://github.com/feross/standard
-let g:syntastic_javascript_checkers = ['standard']
-" autocmd bufwritepost *.js silent !standard --fix %
-set autoread
-
-" rubocop linter
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-
 
 "return '[&et]' if &et is set wrong
 "return '[mixed-indenting]' if spaces and tabs are used to indent
@@ -211,13 +212,6 @@ inoremap <M-o>       <Esc>o
 inoremap <C-j>       <Down>
 
 let g:ragtag_global_maps = 1
-
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 "visual search mappings
 function! s:VSetSearch()
