@@ -307,6 +307,16 @@ if has("syntax")
         " This will switch colors ON
         set t_Co=256
         so ${VIMRUNTIME}/syntax/syntax.vim
+        set termguicolors
+
+        " no idea what this is, cargo'd from several sites incl https://github.com/lifepillar/vim-solarized8#troubleshooting
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        " colorscheme onehalfdark
+        " colorscheme molokai
+        set background=dark
+        " from https://github.com/lifepillar/vim-solarized8
+        colorscheme solarized8_flat
     else
         " this switches colors OFF
         syntax off
@@ -335,14 +345,17 @@ if !has('gui_running')
 endif
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='kolor'
+let g:airline_theme='onehalfdark'
+" let g:airline_theme='kolor'
 
 let g:molokai_original = 1
 let g:rehash256 = 1
-colorscheme molokai
-hi Cursor gui=reverse guifg=NONE guibg=black
-hi iCursor gui=reverse guifg=NONE guibg=steelblue
-hi phpSwitch guifg=#cc3333
+
+
+" an underline on the cursor line
+" set cursorline
+" highlights the column
+set cursorcolumn
 
 :map ,m :w<CR>
 :map ,j :wa<CR>
