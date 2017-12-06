@@ -348,9 +348,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='onehalfdark'
 " let g:airline_theme='kolor'
 
-let g:molokai_original = 1
-let g:rehash256 = 1
-
+" let g:molokai_original = 1
+" let g:rehash256 = 1
 
 " an underline on the cursor line
 " set cursorline
@@ -403,6 +402,11 @@ nmap zz V%zf
 set foldmethod=marker
 "}}}
 
+" for https://github.com/jtratner/vim-flavored-markdown
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
 
 " Google search
 map <M-g> :sil! !/usr/bin/firefox -remote "openURL(http://www.google.com/search?q=<cword>, new-tab)"<CR>;;
