@@ -126,3 +126,15 @@
 [submodule "bundle/vim-flavored-markdown"]
 	path = bundle/vim-flavored-markdown
 	url = git://github.com/jtratner/vim-flavored-markdown.git
+[submodule "/Users/sbeam/.vim/bundle/vim-elixir"]
+	path = /Users/sbeam/.vim/bundle/vim-elixir
+	url = https://github.com/elixir-lang/vim-elixir.git
+[submodule "/Users/sbeam/.vim/bundle/csv"]
+	path = /Users/sbeam/.vim/bundle/csv
+	url = https://github.com/chrisbra/csv.vim
+[submodule "bundle/vim-terraform"]
+	path = bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
+[submodule "bundle/vim-jsx-improve"]
+	path = bundle/vim-jsx-improve
+	url = https://github.com/neoclide/vim-jsx-improve.git

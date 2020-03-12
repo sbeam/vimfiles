@@ -171,6 +171,9 @@ set scrolloff=3
 set sidescrolloff=7
 set sidescroll=1
 
+" read .vimrc in dir vim is started from
+set exrc
+
 "necessary on some Linux distros for pathogen to properly load bundles
 filetype off
 
