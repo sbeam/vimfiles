@@ -141,3 +141,9 @@
 [submodule "/Users/sbeam/.vim/bundle/gruvbox"]
 	path = /Users/sbeam/.vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
+[submodule "bundle/fzf"]
+	path = bundle/fzf
+	url = git@github.com:junegunn/fzf.git
+[submodule "bundle/fzf.vim"]
+	path = bundle/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
