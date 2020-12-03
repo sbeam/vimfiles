@@ -147,3 +147,6 @@
 [submodule "bundle/fzf.vim"]
 	path = bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
+[submodule "bundle/tabnine-vim"]
+	path = bundle/tabnine-vim
+	url = https://github.com/zxqfl/tabnine-vim

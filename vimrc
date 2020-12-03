@@ -1,6 +1,9 @@
 " we use a vim
 set nocompatible
 
+" we like utf-8 usually
+" set encoding=utf-8
+
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -558,6 +561,8 @@ let g:GPGPreferArmor=1
 
 " Tell the GnuPG plugin to sign new files.
 let g:GPGPreferSign=1
+" let g:GPGDebugLevel=3
+" let g:GPGDebugLog="/tmp/gpg.log"
 
 augroup GnuPGExtra
 " Set extra file options.
