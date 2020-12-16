@@ -14,10 +14,6 @@
 	path = bundle/surround
 	url = git://github.com/tpope/vim-surround.git
     ignore = untracked
-[submodule "bundle/NERD_tree"]
-	path = bundle/NERD_tree
-	url = git://github.com/scrooloose/nerdtree.git
-    ignore = untracked
 [submodule "bundle/NERD_commenter"]
 	path = bundle/NERD_commenter
 	url = git://github.com/scrooloose/nerdcommenter.git
@@ -108,9 +104,6 @@
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
 	url = https://github.com/AndrewRadev/splitjoin.vim.git
-[submodule "bundle/ale"]
-	path = bundle/ale
-	url = https://github.com/w0rp/ale.git
 [submodule "pack/themes/opt/solarized8"]
 	path = pack/themes/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
@@ -141,12 +134,6 @@
 [submodule "/Users/sbeam/.vim/bundle/gruvbox"]
 	path = /Users/sbeam/.vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
-[submodule "bundle/fzf"]
-	path = bundle/fzf
-	url = git@github.com:junegunn/fzf.git
-[submodule "bundle/fzf.vim"]
-	path = bundle/fzf.vim
-	url = git@github.com:junegunn/fzf.vim.git
 [submodule "bundle/tabnine-vim"]
 	path = bundle/tabnine-vim
 	url = https://github.com/zxqfl/tabnine-vim

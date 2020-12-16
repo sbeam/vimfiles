@@ -183,6 +183,31 @@ filetype off
 "load pathogen managed plugins
 call pathogen#runtime_append_all_bundles()
 
+" Plug.vim plugins {{{
+" https://github.com/junegunn/vim-plug
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+  " Make sure you use single quotes
+
+  " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+  Plug 'junegunn/vim-easy-align'
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+  autocmd! User goyo.vim echom 'Goyo is now loaded!'
+
+  Plug 'zxqfl/tabnine-vim', { 'for': ['rust','ruby','javascript','go','html','css'] }
+  Plug 'jamessan/vim-gnupg'
+  Plug 'vim-scripts/FuzzyFinder'
+  Plug 'w0rp/ale'
+
+  Plug 'hashivim/vim-terraform'
+call plug#end()
+"}}}
+
+
 "load ftplugins and indent files
 filetype plugin on
 filetype indent on
@@ -370,6 +395,7 @@ set cursorcolumn
 if version >= 600
     filetype plugin indent on
 endif
+
 runtime macros/matchit.vim
 
 
