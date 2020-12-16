@@ -589,3 +589,6 @@ endfunction
 " use silver searcher/ag if install with Ack plugin
 " https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
 let g:ackprg = 'ag --vimgrep'
+
+" use tabnine https://www.tabnine.com/
+" set rtp+=~/tabnine-vim
