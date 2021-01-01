@@ -98,9 +98,6 @@
 	path = bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
     ignore = untracked
-[submodule "bundle/vim-pencil"]
-    path = bundle/vim-pencil
-    url = https://github.com/reedes/vim-pencil
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
 	url = https://github.com/AndrewRadev/splitjoin.vim.git
@@ -110,9 +107,6 @@
 [submodule "bundle/lightline"]
 	path = bundle/lightline
 	url = https://github.com/itchyny/lightline.vim.git
-[submodule "bundle/pencil"]
-	path = bundle/pencil
-	url = https://github.com/reedes/vim-pencil
 [submodule "bundle/tmuxline"]
 	path = bundle/tmuxline
 	url = https://github.com/edkolev/tmuxline.vim

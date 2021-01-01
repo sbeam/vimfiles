@@ -204,6 +204,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'w0rp/ale'
 
   Plug 'hashivim/vim-terraform'
+  Plug 'reedes/vim-pencil'
 call plug#end()
 "}}}
 
@@ -468,26 +469,6 @@ endfunction
 inoremap <TAB> <C-R>=InsertTabWrapper ("forward")<CR>
 inoremap <S-TAB> <C-R>=InsertTabWrapper ("backward")<CR>
 
-
-if has("autocmd")
-    autocmd FileType php     call PHPmapper()
-endif
-
-function! PHPmapper()
-    " PHP debug dump selected thing to stdout, with print_r
-    vmap ,p yoprint '<pre>DEBUG at line '.__LINE__.' of ' . __FILE__ . "\n";<CR>print_r(<ESC>pA);<CR>print '</pre>';<ESC>
-    " PHP debug dump to error_log
-
-    map <F9> :w<CR>:!/usr/bin/php -l %<CR>
-
-    " load PHP on Alt-P
-    map <M-p> :sil! !/usr/bin/firefox -remote "openURL(http://www.php.net/<cword>, new-tab)"<CR>;;
-endfunction
-
-
-
-
-
 map ,c E:call InsertCloseTag()<CR>
 map ,r :call RepeatTag(0)<CR>
 map ,R :call RepeatTag(1)<CR>
@@ -611,6 +592,17 @@ function SetGPGOptions()
     set foldopen=insert
 endfunction
 
+augroup pencil
+  autocmd FileType text     call PencilInit()
+augroup END
+
+function! PencilInit()
+  call pencil#init({'wrap': 'hard', 'autoformat': 0})
+  let g:airline_section_x = '%{PencilMode()}'
+  nnoremap <silent> Q gqap
+  xnoremap <silent> Q gq
+  nnoremap <silent> <leader>Q vapJgqap
+endfunction
 
 " use silver searcher/ag if install with Ack plugin
 " https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
